@@ -13,10 +13,11 @@ import java.util.ArrayList;
  * @author user
  */
 public class AnalizadorLexico {
-     /**
+
+    /**
      * @param args the command line arguments
      */
-   // public static int posActual = 0;
+    // public static int posActual = 0;
     public static int posActual = 0;
     public static String miniPalabra = "";
     public static Character[] miniCadena;
@@ -63,11 +64,11 @@ public class AnalizadorLexico {
     static String times = "*";
     static String divided = "/";
     static String equals = "=";
+    static String isEquals = "==";
     static String lessThan = "<";
     static String greaterThan = ">";
     static String commentary = "//";
     static String semicolon = ";";
-    //  static String semicolon = "==";
 
     public static void main(String[] args) {
         FrmPrincipal frm = new FrmPrincipal();
@@ -77,287 +78,295 @@ public class AnalizadorLexico {
 
     public static void verificarAutomatas(Character[] cadena) {
         while (cadena.length > posInicial) {
-            lexema = (prueba.esPalabra(cadena, posInicial, isTrue, "Literal booleana"));
+            lexema = (prueba.esPalabra(cadena, posInicial, isTrue, "literal booleana:true"));
             if (lexema != null) {
                 posInicial = posActual + 1;
                 arrayLexema.add(lexema);
                 verificarAutomatas(cadena);
             } else {
-                lexema = (prueba.esPalabra(cadena, posInicial, isFalse, "Literal booleana"));
+                lexema = (prueba.esPalabra(cadena, posInicial, isFalse, "literal booleana:false"));
                 if (lexema != null) {
                     posInicial = posActual + 1;
                     arrayLexema.add(lexema);
                     verificarAutomatas(cadena);
                 } else {
-                    lexema = (prueba.esPalabra(cadena, posInicial, isCatch, "Literal booleana"));
+                    lexema = (prueba.esPalabra(cadena, posInicial, isCatch, "excepciones:catch"));
                     if (lexema != null) {
                         posInicial = posActual + 1;
                         arrayLexema.add(lexema);
                         verificarAutomatas(cadena);
                     } else {
-                        lexema = (prueba.esPalabra(cadena, posInicial, isTry, "Literal booleana"));
+                        lexema = (prueba.esPalabra(cadena, posInicial, isTry, "excepciones:try"));
                         if (lexema != null) {
                             posInicial = posActual + 1;
                             arrayLexema.add(lexema);
                             verificarAutomatas(cadena);
                         } else {
-                            lexema = (prueba.esPalabra(cadena, posInicial, isMessage, "Literal booleana"));
+                            lexema = (prueba.esPalabra(cadena, posInicial, isMessage, "salida dato:message"));
                             if (lexema != null) {
                                 posInicial = posActual + 1;
                                 arrayLexema.add(lexema);
                                 verificarAutomatas(cadena);
                             } else {
-                                lexema = (prueba.esPalabra(cadena, posInicial, isReturn, "Literal booleana"));
+                                lexema = (prueba.esPalabra(cadena, posInicial, isReturn, "salida dato:return"));
                                 if (lexema != null) {
                                     posInicial = posActual + 1;
                                     arrayLexema.add(lexema);
                                     verificarAutomatas(cadena);
                                 } else {
-                                    lexema = (prueba.esPalabra(cadena, posInicial, isSwitch, "Literal booleana"));
+                                    lexema = (prueba.esPalabra(cadena, posInicial, isSwitch, "estructura control:switch"));
                                     if (lexema != null) {
                                         posInicial = posActual + 1;
                                         arrayLexema.add(lexema);
                                         verificarAutomatas(cadena);
                                     } else {
-                                        lexema = (prueba.esPalabra(cadena, posInicial, isWhile, "Literal booleana"));
+                                        lexema = (prueba.esPalabra(cadena, posInicial, isWhile, "estructura control:while"));
                                         if (lexema != null) {
                                             posInicial = posActual + 1;
                                             arrayLexema.add(lexema);
                                             verificarAutomatas(cadena);
                                         } else {
-                                            lexema = (prueba.esPalabra(cadena, posInicial, isBreak, "Literal booleana"));
+                                            lexema = (prueba.esPalabra(cadena, posInicial, isBreak, "estructura control:break"));
                                             if (lexema != null) {
                                                 posInicial = posActual + 1;
                                                 arrayLexema.add(lexema);
                                                 verificarAutomatas(cadena);
                                             } else {
-                                                lexema = (prueba.esPalabra(cadena, posInicial, isCase, "Literal booleana"));
+                                                lexema = (prueba.esPalabra(cadena, posInicial, isCase, "estructura control:case"));
                                                 if (lexema != null) {
                                                     posInicial = posActual + 1;
                                                     arrayLexema.add(lexema);
                                                     verificarAutomatas(cadena);
                                                 } else {
-                                                    lexema = (prueba.esPalabra(cadena, posInicial, isElse, "Literal booleana"));
+                                                    lexema = (prueba.esPalabra(cadena, posInicial, isElse, "estructura control:else"));
                                                     if (lexema != null) {
                                                         posInicial = posActual + 1;
                                                         arrayLexema.add(lexema);
                                                         verificarAutomatas(cadena);
                                                     } else {
-                                                        lexema = (prueba.esPalabra(cadena, posInicial, isFor, "Literal booleana"));
+                                                        lexema = (prueba.esPalabra(cadena, posInicial, isFor, "estructura control:for"));
                                                         if (lexema != null) {
                                                             posInicial = posActual + 1;
                                                             arrayLexema.add(lexema);
                                                             verificarAutomatas(cadena);
                                                         } else {
-                                                            lexema = (prueba.esPalabra(cadena, posInicial, isIf, "Literal booleana"));
+                                                            lexema = (prueba.esPalabra(cadena, posInicial, isIf, "estructura control:if"));
                                                             if (lexema != null) {
                                                                 posInicial = posActual + 1;
                                                                 arrayLexema.add(lexema);
                                                                 verificarAutomatas(cadena);
                                                             } else {
-                                                                lexema = (prueba.esPalabra(cadena, posInicial, isDo, "Literal booleana"));
+                                                                lexema = (prueba.esPalabra(cadena, posInicial, isDo, "estructura control:do"));
                                                                 if (lexema != null) {
                                                                     posInicial = posActual + 1;
                                                                     arrayLexema.add(lexema);
                                                                     verificarAutomatas(cadena);
                                                                 } else {
-                                                                    lexema = (prueba.esPalabra(cadena, posInicial, isBoolean, "Literal booleana"));
+                                                                    lexema = (prueba.esPalabra(cadena, posInicial, isBoolean, "tipo dato:boolean"));
                                                                     if (lexema != null) {
                                                                         posInicial = posActual + 1;
                                                                         arrayLexema.add(lexema);
                                                                         verificarAutomatas(cadena);
                                                                     } else {
-                                                                        lexema = (prueba.esPalabra(cadena, posInicial, isInteger, "Literal booleana"));
+                                                                        lexema = (prueba.esPalabra(cadena, posInicial, isInteger, "tipo dato:integer"));
                                                                         if (lexema != null) {
                                                                             posInicial = posActual + 1;
                                                                             arrayLexema.add(lexema);
                                                                             verificarAutomatas(cadena);
                                                                         } else {
-                                                                            lexema = (prueba.esPalabra(cadena, posInicial, isDouble, "Literal booleana"));
+                                                                            lexema = (prueba.esPalabra(cadena, posInicial, isDouble, "tipo dato:double"));
                                                                             if (lexema != null) {
                                                                                 posInicial = posActual + 1;
                                                                                 arrayLexema.add(lexema);
                                                                                 verificarAutomatas(cadena);
                                                                             } else {
-                                                                                lexema = (prueba.esPalabra(cadena, posInicial, isString, "Literal booleana"));
+                                                                                lexema = (prueba.esPalabra(cadena, posInicial, isString, "tipo dato:string"));
                                                                                 if (lexema != null) {
                                                                                     posInicial = posActual + 1;
                                                                                     arrayLexema.add(lexema);
                                                                                     verificarAutomatas(cadena);
                                                                                 } else {
-                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, isStyle, "Literal booleana"));
+                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, isStyle, "tipo dato:style"));
                                                                                     if (lexema != null) {
                                                                                         posInicial = posActual + 1;
                                                                                         arrayLexema.add(lexema);
                                                                                         verificarAutomatas(cadena);
                                                                                     } else {
-                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, isFigure, "Literal booleana"));
+                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, isFigure, "tipo dato:figure"));
                                                                                         if (lexema != null) {
                                                                                             posInicial = posActual + 1;
                                                                                             arrayLexema.add(lexema);
                                                                                             verificarAutomatas(cadena);
                                                                                         } else {
-                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, isColor, "Literal booleana"));
+                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, isColor, "tipo dato:color"));
                                                                                             if (lexema != null) {
                                                                                                 posInicial = posActual + 1;
                                                                                                 arrayLexema.add(lexema);
                                                                                                 verificarAutomatas(cadena);
                                                                                             } else {
 
-                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, isChar, "Literal booleana"));
+                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, isChar, "tipo dato:char"));
                                                                                                 if (lexema != null) {
                                                                                                     posInicial = posActual + 1;
                                                                                                     arrayLexema.add(lexema);
                                                                                                     verificarAutomatas(cadena);
                                                                                                 } else {
 
-                                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, isCanvas, "Literal booleana"));
+                                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, isCanvas, "entrada dato:canvas"));
                                                                                                     if (lexema != null) {
                                                                                                         posInicial = posActual + 1;
                                                                                                         arrayLexema.add(lexema);
                                                                                                         verificarAutomatas(cadena);
                                                                                                     } else {
 
-                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, isVoid, "Literal booleana"));
+                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, isVoid, "entrada dato:void"));
                                                                                                         if (lexema != null) {
                                                                                                             posInicial = posActual + 1;
                                                                                                             arrayLexema.add(lexema);
                                                                                                             verificarAutomatas(cadena);
                                                                                                         } else {
 
-                                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, isNull, "Literal booleana"));
+                                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, isNull, "entrada dato:null"));
                                                                                                             if (lexema != null) {
                                                                                                                 posInicial = posActual + 1;
                                                                                                                 arrayLexema.add(lexema);
                                                                                                                 verificarAutomatas(cadena);
                                                                                                             } else {
 
-                                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, isNew, "Literal booleana"));
+                                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, isNew, "entrada dato:new"));
                                                                                                                 if (lexema != null) {
                                                                                                                     posInicial = posActual + 1;
                                                                                                                     arrayLexema.add(lexema);
                                                                                                                     verificarAutomatas(cadena);
                                                                                                                 } else {
 
-                                                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, isAnd, "Literal booleana"));
+                                                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, isAnd, "operador logico:and"));
                                                                                                                     if (lexema != null) {
                                                                                                                         posInicial = posActual + 1;
                                                                                                                         arrayLexema.add(lexema);
                                                                                                                         verificarAutomatas(cadena);
                                                                                                                     } else {
 
-                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, isOr, "Literal booleana"));
+                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, isOr, "operador logico:or"));
                                                                                                                         if (lexema != null) {
                                                                                                                             posInicial = posActual + 1;
                                                                                                                             arrayLexema.add(lexema);
                                                                                                                             verificarAutomatas(cadena);
                                                                                                                         } else {
 
-                                                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, keyOpen, "Literal booleana"));
+                                                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, keyOpen, "agrupador:openkey"));
                                                                                                                             if (lexema != null) {
                                                                                                                                 posInicial = posActual + 1;
                                                                                                                                 arrayLexema.add(lexema);
                                                                                                                                 verificarAutomatas(cadena);
                                                                                                                             } else {
 
-                                                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, keyClose, "Literal booleana"));
+                                                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, keyClose, "agrupador:closekey"));
                                                                                                                                 if (lexema != null) {
                                                                                                                                     posInicial = posActual + 1;
                                                                                                                                     arrayLexema.add(lexema);
                                                                                                                                     verificarAutomatas(cadena);
                                                                                                                                 } else {
 
-                                                                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, parenthesisOpen, "Literal booleana"));
+                                                                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, parenthesisOpen, "agrupador:openparenthesis"));
                                                                                                                                     if (lexema != null) {
                                                                                                                                         posInicial = posActual + 1;
                                                                                                                                         arrayLexema.add(lexema);
                                                                                                                                         verificarAutomatas(cadena);
                                                                                                                                     } else {
 
-                                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, parenthesisClose, "Literal booleana"));
+                                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, parenthesisClose, "agrupador:claseparenthesis"));
                                                                                                                                         if (lexema != null) {
                                                                                                                                             posInicial = posActual + 1;
                                                                                                                                             arrayLexema.add(lexema);
                                                                                                                                             verificarAutomatas(cadena);
                                                                                                                                         } else {
 
-                                                                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, plus, "Literal booleana"));
+                                                                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, plus, "aritmeticos:plus"));
                                                                                                                                             if (lexema != null) {
                                                                                                                                                 posInicial = posActual + 1;
                                                                                                                                                 arrayLexema.add(lexema);
                                                                                                                                                 verificarAutomatas(cadena);
                                                                                                                                             } else {
 
-                                                                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, minus, "Literal booleana"));
+                                                                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, minus, "aritmeticos:minus"));
                                                                                                                                                 if (lexema != null) {
                                                                                                                                                     posInicial = posActual + 1;
                                                                                                                                                     arrayLexema.add(lexema);
                                                                                                                                                     verificarAutomatas(cadena);
                                                                                                                                                 } else {
 
-                                                                                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, times, "Literal booleana"));
+                                                                                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, times, "aritmeticos:times"));
                                                                                                                                                     if (lexema != null) {
                                                                                                                                                         posInicial = posActual + 1;
                                                                                                                                                         arrayLexema.add(lexema);
                                                                                                                                                         verificarAutomatas(cadena);
                                                                                                                                                     } else {
 
-                                                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, commentary, "Literal booleana"));
+                                                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, commentary, "comentario:comentary"));
                                                                                                                                                         if (lexema != null) {
                                                                                                                                                             posInicial = posActual + 1;
                                                                                                                                                             arrayLexema.add(lexema);
                                                                                                                                                             verificarAutomatas(cadena);
                                                                                                                                                         } else {
 
-                                                                                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, divided, "Literal booleana"));
+                                                                                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, divided, "aritmeticos:divided"));
                                                                                                                                                             if (lexema != null) {
                                                                                                                                                                 posInicial = posActual + 1;
                                                                                                                                                                 arrayLexema.add(lexema);
                                                                                                                                                                 verificarAutomatas(cadena);
                                                                                                                                                             } else {
 
-                                                                                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, lessThan, "Literal booleana"));
+                                                                                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, lessThan, "operador logico:lessthan"));
                                                                                                                                                                 if (lexema != null) {
                                                                                                                                                                     posInicial = posActual + 1;
                                                                                                                                                                     arrayLexema.add(lexema);
                                                                                                                                                                     verificarAutomatas(cadena);
                                                                                                                                                                 } else {
 
-                                                                                                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, greaterThan, "Literal booleana"));
+                                                                                                                                                                    lexema = (prueba.esPalabra(cadena, posInicial, greaterThan, "operador logico:greaterthan"));
                                                                                                                                                                     if (lexema != null) {
                                                                                                                                                                         posInicial = posActual + 1;
                                                                                                                                                                         arrayLexema.add(lexema);
                                                                                                                                                                         verificarAutomatas(cadena);
                                                                                                                                                                     } else {
 
-                                                                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, semicolon, "Literal booleana"));
+                                                                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, semicolon, "delimitador:semicolon"));
                                                                                                                                                                         if (lexema != null) {
                                                                                                                                                                             posInicial = posActual + 1;
                                                                                                                                                                             arrayLexema.add(lexema);
                                                                                                                                                                             verificarAutomatas(cadena);
                                                                                                                                                                         } else {
 
-                                                                                                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, isInteger, "Literal booleana"));
+                                                                                                                                                                            lexema = (prueba.esPalabra(cadena, posInicial, isEquals, "operador logico:isequals"));
                                                                                                                                                                             if (lexema != null) {
                                                                                                                                                                                 posInicial = posActual + 1;
                                                                                                                                                                                 arrayLexema.add(lexema);
                                                                                                                                                                                 verificarAutomatas(cadena);
                                                                                                                                                                             } else {
-                                                                                                                                                                                lexema = prueba.esUnError(cadena, posInicial);
+
+                                                                                                                                                                                lexema = (prueba.esPalabra(cadena, posInicial, equals, "asignacion:equals"));
                                                                                                                                                                                 if (lexema != null) {
                                                                                                                                                                                     posInicial = posActual + 1;
                                                                                                                                                                                     arrayLexema.add(lexema);
                                                                                                                                                                                     verificarAutomatas(cadena);
                                                                                                                                                                                 } else {
-                                                                                                                                                                                    lexema = prueba.esIdentificador(cadena, posInicial);
+                                                                                                                                                                                    lexema = prueba.esUnError(cadena, posInicial);
                                                                                                                                                                                     if (lexema != null) {
-                                                                                                                                                                                        posInicial = posActual;
+                                                                                                                                                                                        posInicial = posActual + 1;
                                                                                                                                                                                         arrayLexema.add(lexema);
                                                                                                                                                                                         verificarAutomatas(cadena);
                                                                                                                                                                                     } else {
-                                                                                                                                                                                        System.out.println("ERROR");
-                                                                                                                                                                                        posInicial = posActual;
-                                                                                                                                                                                        verificarAutomatas(cadena);
+                                                                                                                                                                                        lexema = prueba.esIdentificador(cadena, posInicial);
+                                                                                                                                                                                        if (lexema != null) {
+                                                                                                                                                                                            posInicial = posActual;
+                                                                                                                                                                                            arrayLexema.add(lexema);
+                                                                                                                                                                                            verificarAutomatas(cadena);
+                                                                                                                                                                                        } else {
+                                                                                                                                                                                            System.out.println("ERROR");
+                                                                                                                                                                                            posInicial = posActual;
+                                                                                                                                                                                            verificarAutomatas(cadena);
+                                                                                                                                                                                        }
                                                                                                                                                                                     }
                                                                                                                                                                                 }
                                                                                                                                                                             }
