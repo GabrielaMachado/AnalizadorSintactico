@@ -39,7 +39,7 @@ public class AnalizadorLexico {
     static String isCase = "case";
     static String isElse = "else";
     static String isFor = "for";
-    static String isIf = "if";
+    public static String isIf = "if";
     static String isDo = "do";
     static String isBoolean = "boolean";
     static String isInteger = "integer";
@@ -55,10 +55,10 @@ public class AnalizadorLexico {
     static String isNew = "new";
     static String isAnd = "and";
     static String isOr = "or";
-    static String keyOpen = "{";
-    static String keyClose = "}";
-    static String parenthesisOpen = "(";
-    static String parenthesisClose = ")";
+    public static String keyOpen = "{";
+    public static String keyClose = "}";
+    public static String parenthesisOpen = "(";
+    public static String parenthesisClose = ")";
     static String plus = "+";
     static String minus = "-";
     static String times = "*";
