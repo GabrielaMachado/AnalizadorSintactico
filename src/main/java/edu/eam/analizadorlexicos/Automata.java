@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eam.analizadorlexico;
-import static edu.eam.analizadorlexico.AnalizadorLexico.posActual;
+package edu.eam.analizadorlexicos;
+import static edu.eam.analizadorlexicos.AnalizadorLexico.posActual;
 
 /**
  *
