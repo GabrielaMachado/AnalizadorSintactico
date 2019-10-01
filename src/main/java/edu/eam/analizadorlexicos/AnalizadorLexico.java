@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eam.analizadorlexico;
+package edu.eam.analizadorlexicos;
 
-import static edu.eam.analizadorlexico.FrmPrincipal.prueba;
+import static edu.eam.analizadorlexicos.FrmPrincipal.prueba;
 import java.util.ArrayList;
 
 /**
@@ -275,7 +275,7 @@ public class AnalizadorLexico {
                                                                                                                                         verificarAutomatas(cadena);
                                                                                                                                     } else {
 
-                                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, parenthesisClose, "agrupador:claseparenthesis"));
+                                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, parenthesisClose, "agrupador:closeparenthesis"));
                                                                                                                                         if (lexema != null) {
                                                                                                                                             posInicial = posActual + 1;
                                                                                                                                             arrayLexema.add(lexema);
@@ -303,7 +303,7 @@ public class AnalizadorLexico {
                                                                                                                                                         verificarAutomatas(cadena);
                                                                                                                                                     } else {
 
-                                                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, commentary, "comentario:comentary"));
+                                                                                                                                                        lexema = (prueba.esPalabra(cadena, posInicial, commentary, "comentario:commentary"));
                                                                                                                                                         if (lexema != null) {
                                                                                                                                                             posInicial = posActual + 1;
                                                                                                                                                             arrayLexema.add(lexema);
