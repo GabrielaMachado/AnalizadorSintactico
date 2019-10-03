@@ -5,13 +5,18 @@
  */
 package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
-import edu.eam.analizadorlexico.AnalizadorLexico;
+import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.excepciones.SintacticException;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 
 public class GramaticaIF implements Gramatica {
 
+    @Override
+    public Sentencia analizar(Sentencia padre, ArrayList<Lexema> arrayLexemas) {
+        return null;
+    }
 //	@Override
 //	public Sentencia analizar(Sentencia padre, FlujoTokens flujoTokens) {
 //
@@ -51,5 +56,6 @@ public class GramaticaIF implements Gramatica {
 //	 * boolean a = x<10 && y>20
 //	 * 
 //
+
 }
 
