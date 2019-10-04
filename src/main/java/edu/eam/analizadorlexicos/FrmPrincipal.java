@@ -184,7 +184,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
         jTable1.setModel(llenarTabla());
         
-     //   Main main = AnalizadorSintactico.getMain();
+       // Main main = AnalizadorSintactico.getMain();
     //    main.llenarHijos();
       //  jTree1.setModel(new DefaultTreeModel(main));
        
