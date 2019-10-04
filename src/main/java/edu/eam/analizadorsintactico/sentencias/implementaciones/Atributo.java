@@ -24,6 +24,7 @@ public class Atributo extends Sentencia {
      * Nombre del metodo
      */
     private Lexema ident;
+    private Lexema equals;
 
     /**
      * Tipo de retorno.
@@ -33,9 +34,10 @@ public class Atributo extends Sentencia {
     public Atributo() {
     }
 
-    public Atributo(Lexema tipoDato, Lexema ident, Lexema inicializacion) {
+    public Atributo(Lexema tipoDato, Lexema ident, Lexema equals, Lexema inicializacion) {
         this.tipoDato = tipoDato;
         this.ident = ident;
+        this.equals = ident;
         this.inicializacion = inicializacion;
     }
 
@@ -66,6 +68,14 @@ public class Atributo extends Sentencia {
         this.ident = ident;
     }
 
+    public Lexema getEquals() {
+        return equals;
+    }
+
+    public void setEquals(Lexema equals) {
+        this.ident = equals;
+    }
+    
     public Lexema getInicializacion() {
         return inicializacion;
     }

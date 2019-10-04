@@ -28,9 +28,8 @@ public class GramaticaAtributo implements Gramatica {
         //primer token de la gramatica.
         Lexema lexema = arrayLexemas.get(posA);
 
-
         //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString() || lexema.getTipo() == TipoLexemaEnum.TIPO_DATO.toString()) {
+        if (lexema.getTipo() == TipoLexemaEnum.TIPO_DATO.toString()) {
             atributo.setTipoDato(lexema);
             posA++;
             lexema = arrayLexemas.get(posA);
@@ -40,32 +39,61 @@ public class GramaticaAtributo implements Gramatica {
                 atributo.setIdent(lexema);
                 posA++;
                 lexema = arrayLexemas.get(posA);
-                
-                   //     modificador de acceso del atributo...
-     //   esto es opcional, por eso no tiene else
-        if (lexema.getTipo() == TipoLexemaEnum.INICIALIZACION.toString()) {
-            atributo.setInicializacion(lexema);
-            posA++;
-                lexema = arrayLexemas.get(posA);
-        }
-        
-        if (lexema.getToken().equals(",")) {
-            atributo.setInicializacion(lexema);
-            posA++;
-                lexema = arrayLexemas.get(posA);
-        }
-                
 
-                if (lexema.getToken().equals(";") ){
-                    //derivar...
-                    return atributo;
+                if (lexema.getTipo() == TipoLexemaEnum.ASIGNACION.toString()) {
+                    atributo.setEquals(lexema);
+                    posA++;
+                    lexema = arrayLexemas.get(posA);
+
+                    if (lexema.getTipo() == TipoLexemaEnum.INICIALIZACION.toString()) {
+                        atributo.setInicializacion(lexema);
+                        posA++;
+                        lexema = arrayLexemas.get(posA);
+
+//                        if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
+//                            instancia.setIdent3(lexema);
+//                            posA++;
+//                            lexema = arrayLexemas.get(posA);
+//
+//                            if (lexema.getToken().equals("(")) {
+//                                instancia.setIdent1(lexema);
+//                                posA++;
+//                                lexema = arrayLexemas.get(posA);
+//
+//                                if (lexema.getToken().equals(")")) {
+//                                    instancia.setIdent1(lexema);
+//                                    posA++;
+//                                    lexema = arrayLexemas.get(posA);
+//                                    
+//                                    if (lexema.getToken().equals(";")) {
+//                                        //derivar...
+//                                        return instancia;
+//                                    } else {
+//                                        //si no es identificador, no es atributo, se retorna el flujo a 
+//                                        //la posicion inicial
+//                                        posA = posI;
+//                                        return null; //se retorna null para que se pruebe con otra regal..
+//                                    }
+//                                } else {
+//                                    posA = posI;
+//                                    return null; //
+//                                }
+//                            } else {
+//                                posA = posI;
+//                                return null; //
+//                            }
+//                        } else {
+//                            posA = posI;
+//                            return null; //
+//                        }
+                    } else {
+                        posA = posI;
+                        return null; //
+                    }
                 } else {
-                    //si no es identificador, no es atributo, se retorna el flujo a 
-                    //la posicion inicial
                     posA = posI;
-                    return null; //se retorna null para que se pruebe con otra regal..
+                    return null; //s
                 }
-
             } else {
                 //si no es identificador, no es atributo, se retorna el flujo a 
                 //la posicion inicial
