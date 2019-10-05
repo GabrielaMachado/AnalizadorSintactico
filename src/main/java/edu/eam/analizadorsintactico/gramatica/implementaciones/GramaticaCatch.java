@@ -6,19 +6,102 @@
 package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
+import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.Catch;
 import java.util.ArrayList;
 
 /**
  *
  * @author user
  */
-public class GramaticaCatch implements Gramatica{
+public class GramaticaCatch implements Gramatica {
 
     @Override
     public Sentencia analizar(Sentencia padre, ArrayList<Lexema> arrayLexemas) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Sentencia a retornar....
+        Catch isCatch = new Catch();
+        //  flujoTokens.guardarPosicion();
+        int posI = posicionInicial;
+        int posA = posicionInicial;
+        //primer token de la gramatica.
+        Lexema lexema = arrayLexemas.get(posA);
+
+        //tipo de dato.....
+        if (lexema.getTipo() == TipoLexemaEnum.CATCH.toString()) {
+            isCatch.setIsCatch(lexema);
+            posA++;
+            lexema = arrayLexemas.get(posA);
+
+            //nombre del atributo....
+            if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENP.toString()) {
+                isCatch.setOpenP(lexema);
+                posA++;
+                lexema = arrayLexemas.get(posA);
+
+                if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
+                    isCatch.setIdent1(lexema);
+                    posA++;
+                    lexema = arrayLexemas.get(posA);
+
+                    if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
+                        isCatch.setIdent2(lexema);
+                        posA++;
+                        lexema = arrayLexemas.get(posA);
+
+                        if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEP.toString()) {
+                            isCatch.setCloseP(lexema);
+                            posA++;
+                            lexema = arrayLexemas.get(posA);
+
+                            if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENKEY.toString()) {
+                                isCatch.setOpenKey(lexema);
+                                posA++;
+                                lexema = arrayLexemas.get(posA);
+
+                                if (lexema.getTipo() == TipoLexemaEnum.TIPO_DATO.toString()) {
+                                    isCatch.setListaMiembros(lexema);
+                                    posA++;
+                                    lexema = arrayLexemas.get(posA);
+                                }
+
+                                if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY.toString()) {
+                                    return isCatch;
+
+//                      
+                                } else {
+                                    posA = posI;
+                                    return null; //
+                                }
+                            } else {
+                                posA = posI;
+                                return null; //s
+                            }
+                        } else {
+                            //si no es identificador, no es atributo, se retorna el flujo a 
+                            //la posicion inicial
+                            posA = posI;
+                            return null; //se retorna null para que se pruebe con otra regal..
+                        }
+                    } else {
+                        //si no es identificador, no es atributo, se retorna el flujo a 
+                        //la posicion inicial
+                        posA = posI;
+                        return null; //se retorna null para que se pruebe con otra regal..
+                    }
+                } else {
+
+                    posA = posI;
+                    return null;
+                }
+            } else {
+                posA = posI;
+                return null;
+            }
+        }else {
+                posA = posI;
+                return null;
+            }
     }
-    
 }

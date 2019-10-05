@@ -64,5 +64,6 @@ public enum TipoLexemaEnum {
     OP_LOG_LTHAN,
     OP_LOG_ISEQUALS,
     DELIMITADOR,
-    ASIGNACION
+    ASIGNACION,
+    CATCH
 }
