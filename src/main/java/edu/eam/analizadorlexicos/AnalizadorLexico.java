@@ -77,7 +77,7 @@ public class AnalizadorLexico {
 
     }
 
-    public static void verificarAutomatas(Character[] cadena) {
+    public static ArrayList<Lexema> verificarAutomatas(Character[] cadena) {
         while (cadena.length > posInicial) {
             lexema = (prueba.esPalabra(cadena, posInicial, isTrue, TipoLexemaEnum.LBOL_TRUE));
             if (lexema != null) {
@@ -420,5 +420,6 @@ public class AnalizadorLexico {
                 }
             }
         }
+        return arrayLexema;
     }
 }
