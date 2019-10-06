@@ -35,85 +35,85 @@ public class Case extends Sentencia{
     
     private Lexema semicolon2;
 
-    public Mensaje() {
+    public Case() {
     }
 
-    public Mensaje(Lexema mensaje, Lexema equals, Lexema openP, Lexema comillas, Lexema contenidoMensaje,
-            Lexema operadoresAritmeticos, Lexema closeP, Lexema semicolon) {
-        this.mensaje = mensaje;
-        this.equals = equals;
-        this.openP = openP;
-        this.comillas = comillas;
-        this.contenidoMensaje = contenidoMensaje;
-        this.operadoresAritmeticos = operadoresAritmeticos;
-        this.closeP = closeP;
-        this.semicolon = semicolon;
-    }
-
-    public Lexema getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(Lexema mensaje) {
-        this.mensaje = mensaje;
-    }
-
-    public Lexema getEquals() {
-        return equals;
-    }
-
-    public void setEquals(Lexema equals) {
-        this.equals = equals;
-    }
-
-    public Lexema getOpenP() {
-        return openP;
-    }
-
-    public void setOpenP(Lexema openP) {
-        this.openP = openP;
-    }
-
-    public Lexema getComillas() {
-        return comillas;
-    }
-
-    public void setComillas(Lexema comillas) {
-        this.comillas = comillas;
-    }
-
-    public Lexema getContenidoMensaje() {
-        return contenidoMensaje;
-    }
-
-    public void setContenidoMensaje(Lexema contenidoMensaje) {
-        this.contenidoMensaje = contenidoMensaje;
-    }
-
-    public Lexema getOperadoresAritmeticos() {
-        return operadoresAritmeticos;
-    }
-
-    public void setOperadoresAritmeticos(Lexema operadoresAritmeticos) {
-        this.operadoresAritmeticos = operadoresAritmeticos;
-    }
-
-    public Lexema getCloseP() {
-        return closeP;
-    }
-
-    public void setCloseP(Lexema closeP) {
-        this.closeP = closeP;
-    }
-
-    public Lexema getSemicolon() {
-        return semicolon;
-    }
-
-    public void setSemicolon(Lexema semicolon) {
-        this.semicolon = semicolon;
-    }
-    
+//    public Case(Lexema mensaje, Lexema equals, Lexema openP, Lexema comillas, Lexema contenidoMensaje,
+//            Lexema operadoresAritmeticos, Lexema closeP, Lexema semicolon) {
+//        this.mensaje = mensaje;
+//        this.equals = equals;
+//        this.openP = openP;
+//        this.comillas = comillas;
+//        this.contenidoMensaje = contenidoMensaje;
+//        this.operadoresAritmeticos = operadoresAritmeticos;
+//        this.closeP = closeP;
+//        this.semicolon = semicolon;
+//    }
+//
+//    public Lexema getMensaje() {
+//        return mensaje;
+//    }
+//
+//    public void setMensaje(Lexema mensaje) {
+//        this.mensaje = mensaje;
+//    }
+//
+//    public Lexema getEquals() {
+//        return equals;
+//    }
+//
+//    public void setEquals(Lexema equals) {
+//        this.equals = equals;
+//    }
+//
+//    public Lexema getOpenP() {
+//        return openP;
+//    }
+//
+//    public void setOpenP(Lexema openP) {
+//        this.openP = openP;
+//    }
+//
+//    public Lexema getComillas() {
+//        return comillas;
+//    }
+//
+//    public void setComillas(Lexema comillas) {
+//        this.comillas = comillas;
+//    }
+//
+//    public Lexema getContenidoMensaje() {
+//        return contenidoMensaje;
+//    }
+//
+//    public void setContenidoMensaje(Lexema contenidoMensaje) {
+//        this.contenidoMensaje = contenidoMensaje;
+//    }
+//
+//    public Lexema getOperadoresAritmeticos() {
+//        return operadoresAritmeticos;
+//    }
+//
+//    public void setOperadoresAritmeticos(Lexema operadoresAritmeticos) {
+//        this.operadoresAritmeticos = operadoresAritmeticos;
+//    }
+//
+//    public Lexema getCloseP() {
+//        return closeP;
+//    }
+//
+//    public void setCloseP(Lexema closeP) {
+//        this.closeP = closeP;
+//    }
+//
+//    public Lexema getSemicolon() {
+//        return semicolon;
+//    }
+//
+//    public void setSemicolon(Lexema semicolon) {
+//        this.semicolon = semicolon;
+//    }
+//    
     @Override
     public List<Sentencia> llenarHijos() {
 //        hijos = new ArrayList<>();
