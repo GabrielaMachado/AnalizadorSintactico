@@ -30,13 +30,13 @@ public class GramaticaMain implements Gramatica{
         Lexema lexema = arrayLexemas.get(posA);
 
         //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.MAIN.toString()) {
+        if (lexema.getTipo() == TipoLexemaEnum.MAIN) {
             sentenciaMain.setMain(lexema);
             posA++;
             lexema = arrayLexemas.get(posA);
 
             //nombre del atributo....
-            if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENKEY.toString()) {
+            if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENKEY) {
                 sentenciaMain.setOpenKey(lexema);
                 posA++;
                 lexema = arrayLexemas.get(posA);
@@ -46,7 +46,7 @@ public class GramaticaMain implements Gramatica{
                     posA++;
                     lexema = arrayLexemas.get(posA);
 
-                    if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY.toString()) {
+                    if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY) {
                         sentenciaMain.setCloseKey(lexema);
                         posA++;
                         lexema = arrayLexemas.get(posA);

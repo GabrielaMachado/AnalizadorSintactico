@@ -11,10 +11,10 @@ package edu.eam.analizadorlexicos;
  */
 public class Lexema {
      private int posicion;
-        private String tipo;
+        private TipoLexemaEnum tipo;
         private String token;
 
-        public Lexema(int posicion, String tipo, String token) {
+        public Lexema(int posicion, TipoLexemaEnum tipo, String token) {
             setCont(posicion);
             setTipo(tipo);
             setToken(token);
@@ -24,7 +24,7 @@ public class Lexema {
             this.posicion = posicion;
         }
 
-        public void setTipo(String tipo) {
+        public void setTipo(TipoLexemaEnum tipo) {
             this.tipo = tipo;
         }
 
@@ -36,7 +36,7 @@ public class Lexema {
             return posicion;
         }
 
-        public String getTipo() {
+        public TipoLexemaEnum getTipo() {
             return tipo;
         }
 

@@ -10,7 +10,6 @@ import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import static edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica.posicionInicial;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
-import edu.eam.analizadorsintactico.sentencias.implementaciones.Instancia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Mensaje;
 import java.util.ArrayList;
 
@@ -31,43 +30,43 @@ public class GramaticaMensaje implements Gramatica{
         Lexema lexema = arrayLexemas.get(posA);
 
         //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
-            mensaje.setIdent1(lexema);
+        if (lexema.getTipo() == TipoLexemaEnum.SD_MESSAGE) {
+            mensaje.setMensaje(lexema);
             posA++;
             lexema = arrayLexemas.get(posA);
 
             //nombre del atributo....
-            if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
-                mensaje.setIdent2(lexema);
+            if (lexema.getTipo() == TipoLexemaEnum.ASIGNACION) {
+                mensaje.setEquals(lexema);
                 posA++;
                 lexema = arrayLexemas.get(posA);
 
-                if (lexema.getToken().equals("=")) {
-                    mensaje.setIdent1(lexema);
+                if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENP) {
+                    mensaje.setOpenP(lexema);
                     posA++;
                     lexema = arrayLexemas.get(posA);
 
-                    if (lexema.getToken().equals("new")) {
-                        mensaje.setIdent1(lexema);
+                    if (lexema.getTipo() == TipoLexemaEnum.QUOTES) {
+                        mensaje.setComillas(lexema);
                         posA++;
                         lexema = arrayLexemas.get(posA);
 
-                        if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
-                            mensaje.setIdent3(lexema);
+                        if (lexema.getTipo() == TipoLexemaEnum.IDENT/*lista contenido mensaje*/) {
+                            mensaje.setContenidoMensaje(lexema);
                             posA++;
                             lexema = arrayLexemas.get(posA);
 
-                            if (lexema.getToken().equals("(")) {
-                                mensaje.setIdent1(lexema);
+                            if (lexema.getTipo() == TipoLexemaEnum.ASIGNACION/*lista operadores aritmeticos*/) {
+                                mensaje.setOperadoresAritmeticos(lexema);
                                 posA++;
                                 lexema = arrayLexemas.get(posA);
 
-                                if (lexema.getToken().equals(")")) {
-                                    mensaje.setIdent1(lexema);
+                                if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEP) {
+                                    mensaje.setCloseP(lexema);
                                     posA++;
                                     lexema = arrayLexemas.get(posA);
                                     
-                                    if (lexema.getToken().equals(";")) {
+                                    if (lexema.getTipo() == TipoLexemaEnum.DELIMITADOR) {
                                         //derivar...
                                         return mensaje;
                                     } else {

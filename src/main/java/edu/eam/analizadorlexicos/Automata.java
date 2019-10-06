@@ -29,7 +29,7 @@ public class Automata {
         return ch;
     }
 
-    public Lexema esPalabra(Character ch[], int pos, String isTipo, String tipo) {
+    public Lexema esPalabra(Character ch[], int pos, String isTipo, TipoLexemaEnum tipo) {
         int posIn = pos;
         String lexema = "";
 
@@ -66,7 +66,7 @@ public class Automata {
             if (ch[pos].toString().equals(tokens[j].toString())) {
                 pos++;
                 lexema = ch[pos].toString();
-                return lex = new Lexema(pos - 1, "Error", lexema);
+                return lex = new Lexema(pos - 1, TipoLexemaEnum.ERROR, lexema);
             }
         }
         return null;
@@ -88,7 +88,7 @@ public class Automata {
                 pos++;
                 posActual = pos;
             }
-            return lex = new Lexema(posIden, "Identificadores", lexema);
+            return lex = new Lexema(posIden, TipoLexemaEnum.IDENT, lexema);
         }
     }
 }

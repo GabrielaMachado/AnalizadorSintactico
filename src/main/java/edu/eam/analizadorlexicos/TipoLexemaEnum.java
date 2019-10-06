@@ -12,7 +12,7 @@ package edu.eam.analizadorlexicos;
 public enum TipoLexemaEnum {
     
     MAIN,
-    
+    ERROR,
     IDENT,
     TIPO_DATO,
     INICIALIZACION,
@@ -64,5 +64,6 @@ public enum TipoLexemaEnum {
     OP_LOG_LTHAN,
     OP_LOG_ISEQUALS,
     DELIMITADOR,
-    ASIGNACION
+    ASIGNACION,
+    QUOTES
 }
