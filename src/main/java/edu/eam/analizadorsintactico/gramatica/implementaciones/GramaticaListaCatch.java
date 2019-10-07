@@ -16,10 +16,18 @@ import java.util.ArrayList;
  *
  * @author user
  */
-public class GramaticaListaCatch implements Gramatica {
+public class GramaticaListaCatch implements Gramatica{
 
+    /**
+     * Metodo que analiza el flujo de tokens buscando lista de sentencias
+     * separadas por algun token en especial.
+     *
+     * @param flujo, flujo de tokens...
+     * @return la lista de sentencias o null si no esta.
+     */
     @Override
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
+
 //
 //        GramaticaCatch gramaticaCatch = new GramaticaCatch();
 //        Catch isCatch;

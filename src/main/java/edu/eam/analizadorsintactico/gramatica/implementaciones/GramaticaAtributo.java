@@ -50,42 +50,15 @@ public class GramaticaAtributo implements Gramatica {
                         posA++;
                         lexema = arrayLexemas.get(posA);
 
-//                        if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
-//                            instancia.setIdent3(lexema);
-//                            posA++;
-//                            lexema = arrayLexemas.get(posA);
-//
-//                            if (lexema.getToken().equals("(")) {
-//                                instancia.setIdent1(lexema);
-//                                posA++;
-//                                lexema = arrayLexemas.get(posA);
-//
-//                                if (lexema.getToken().equals(")")) {
-//                                    instancia.setIdent1(lexema);
-//                                    posA++;
-//                                    lexema = arrayLexemas.get(posA);
-//                                    
-//                                    if (lexema.getToken().equals(";")) {
-//                                        //derivar...
-//                                        return instancia;
-//                                    } else {
-//                                        //si no es identificador, no es atributo, se retorna el flujo a 
-//                                        //la posicion inicial
-//                                        posA = posI;
-//                                        return null; //se retorna null para que se pruebe con otra regal..
-//                                    }
-//                                } else {
-//                                    posA = posI;
-//                                    return null; //
-//                                }
-//                            } else {
-//                                posA = posI;
-//                                return null; //
-//                            }
-//                        } else {
-//                            posA = posI;
-//                            return null; //
-//                        }
+                        if (lexema.getTipo() == TipoLexemaEnum.DELIMITADOR) {
+                            //derivar...
+                            return atributo;
+                        } else {
+                            //si no es identificador, no es atributo, se retorna el flujo a 
+                            //la posicion inicial
+                            posA = posI;
+                            return null; //se retorna null para que se pruebe con otra regal..
+                        }
                     } else {
                         posA = posI;
                         return null; //
