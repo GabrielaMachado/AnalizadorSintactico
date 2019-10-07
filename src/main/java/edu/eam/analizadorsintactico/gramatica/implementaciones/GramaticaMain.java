@@ -10,7 +10,10 @@ import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.Atributo;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.IF;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.SentenciaMain;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.While;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +26,12 @@ public class GramaticaMain implements Gramatica {
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 //Sentencia a retornar....
         SentenciaMain sentenciaMain = new SentenciaMain();
+        IF isIf;
+        While isWhile;
+        Atributo atributo;
+        GramaticaIF gramaticaIF = new GramaticaIF();
+        GramaticaAtributo gramaticaAtributo = new GramaticaAtributo();
+        //   GramaticaWhile gramaticaWhile = new GramaticaWhile();
         //  flujoTokens.guardarPosicion();
         int posI = posicion;
         int posA = posicion;
@@ -39,29 +48,56 @@ public class GramaticaMain implements Gramatica {
             if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENKEY) {
                 sentenciaMain.setOpenKey(lexema);
                 posA++;
-                lexema = arrayLexemas.get(posA);
 
-                if (lexema.getToken().equals("cuerpo")) {
-                    sentenciaMain.setCuerpo(lexema);
-                    posA++;
-                    lexema = arrayLexemas.get(posA);
+                posicion = posA;
+                isIf = (IF) gramaticaIF.analizar(arrayLexemas);
 
-                    if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY) {
-                        sentenciaMain.setCloseKey(lexema);
-                        posA++;
+                if (isIf != null) {
+                    sentenciaMain.setCondicion(isIf);
+                    posicion++;
+                    posA = posicion;
+
+                    
+                    atributo = (Atributo) gramaticaAtributo.analizar(arrayLexemas);
+
+                    if (atributo != null) {
+                        sentenciaMain.setAtributo(atributo);
+                        posicion++;
+                        posA = posicion;
+
+//                    posicion = posA;
+//                    isWhile = (While) gramaticaWhile.analizar(arrayLexemas);
+//
+//                    if (isWhile != null) {
+//                        sentenciaMain.setIsWhile(isWhile);
+//                        posicion++;
+//                        posA = posicion;
                         lexema = arrayLexemas.get(posA);
+                        if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY) {
+                            sentenciaMain.setCloseKey(lexema);
+                            posA++;
+                            lexema = arrayLexemas.get(posA);
 
-                        if (lexema.getToken().equals(";")) {
-                            posicionInicial++;
-                            return sentenciaMain;
+                            if (lexema.getToken().equals(";")) {
+                                posicion = posA;
+                                return sentenciaMain;
+                            } else {
+                                posA = posI;
+                                return null;
+                            }
+
+//                        } 
+//                        else {
+//                            posA = posI;
+//                            return null; //
+//                        }
                         } else {
                             posA = posI;
-                            return null;
+                            return null; //s
                         }
-
                     } else {
                         posA = posI;
-                        return null; //
+                        return null; //s
                     }
                 } else {
                     posA = posI;

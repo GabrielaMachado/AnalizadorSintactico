@@ -43,12 +43,12 @@ public class Atributo extends Sentencia {
 
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
-//        if (inicializacion != null) {
-//            hijos.add(new SentenciaToken(inicializacion));
-//        }
+        hijos = new ArrayList<>();
+        hijos.add(new SentenciaLexema(tipoDato));
+        hijos.add(new SentenciaLexema(ident));
+        if (inicializacion != null) {
+            hijos.add(new SentenciaLexema(inicializacion));
+        }
         return hijos;
     }
 

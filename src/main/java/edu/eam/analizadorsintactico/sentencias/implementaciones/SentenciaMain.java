@@ -20,18 +20,23 @@ public class SentenciaMain extends Sentencia {
 
     private Lexema openKey;
 
-    private Lexema cuerpo;
+    private IF condicion;
+    
+    private While isWhile;
+    
+    private Atributo atributo;
 
     private Lexema closeKey;
 
     public SentenciaMain() {
     }
 
-    public SentenciaMain(Lexema main, Lexema openKey, Lexema cuerpo, Lexema closeKey) {
+        public SentenciaMain(Lexema main, Lexema openKey, IF condicion, Lexema closeKey, Atributo atributo) {
         this.main = main;
         this.openKey = openKey;
-        this.cuerpo = cuerpo;
+        this.condicion = condicion;
         this.closeKey = closeKey;
+        this.atributo = atributo;
     }
 
     public Lexema getMain() {
@@ -50,12 +55,12 @@ public class SentenciaMain extends Sentencia {
         this.openKey = openKey;
     }
 
-    public Lexema getCuerpo() {
-        return cuerpo;
+    public IF getCondicion() {
+        return condicion;
     }
 
-    public void setCuerpo(Lexema cuerpo) {
-        this.cuerpo = cuerpo;
+    public void setCondicion(IF condicion) {
+        this.condicion = condicion;
     }
 
     public Lexema getCloseKey() {
@@ -66,6 +71,24 @@ public class SentenciaMain extends Sentencia {
         this.closeKey = closeKey;
     }
 
+    public While getIsWhile() {
+        return isWhile;
+    }
+
+    public void setIsWhile(While isWhile) {
+        this.isWhile = isWhile;
+    }
+
+    public Atributo getAtributo() {
+        return atributo;
+    }
+
+    public void setAtributo(Atributo atributo) {
+        this.atributo = atributo;
+    }
+    
+    
+
     @Override
     public List<Sentencia> llenarHijos() {
         hijos = new ArrayList<>();
@@ -73,8 +96,12 @@ public class SentenciaMain extends Sentencia {
          if (main != null) {
             hijos.add(new SentenciaLexema(main));
         }
-         if (cuerpo != null) {
-            hijos.add(new SentenciaLexema(cuerpo));
+         if (condicion != null) {
+            hijos.add(condicion);
+        }
+         
+         if (atributo != null) {
+            hijos.add(atributo);
         }
 
          
@@ -86,7 +113,7 @@ public class SentenciaMain extends Sentencia {
 
     @Override
     public String toString() {
-        return "Main: " + main.getToken() + " " + openKey.getToken() + " " + cuerpo.getToken()
+        return "Main: " + main.getToken() + " " + openKey.getToken() + " " + condicion.getIdent1()
                 + " " + closeKey.getToken();
     }
 
