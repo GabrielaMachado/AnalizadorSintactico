@@ -66,5 +66,6 @@ public enum TipoLexemaEnum {
     OP_LOG_ISEQUALS,
     DELIMITADOR,
     ASIGNACION,
-    QUOTES
+    QUOTES,
+    COMA
 }

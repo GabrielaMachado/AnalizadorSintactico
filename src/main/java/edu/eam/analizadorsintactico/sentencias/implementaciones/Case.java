@@ -131,7 +131,6 @@ public class Case extends Sentencia{
     public void setSemicolon2(Lexema semicolon2) {
         this.semicolon2 = semicolon2;
     }
-
    
     @Override
     public List<Sentencia> llenarHijos() {

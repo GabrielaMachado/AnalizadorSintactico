@@ -62,6 +62,7 @@ public class GramaticaCatch implements Gramatica {
                                 posA++;
                                 lexema = arrayLexemas.get(posA);
 
+
                                 
 //                                 ListaMiembros<Miembro> listaMiembros = (ListaMiembros<Miembro>) GramaticaListaMiembro.analizar(lexema);
 //        main.setListaSentencia(listaSentencias);
@@ -70,6 +71,12 @@ public class GramaticaCatch implements Gramatica {
 //                                    posA++;
 //                                    lexema = arrayLexemas.get(posA);
 //                                }
+
+                                if (lexema.getTipo() == TipoLexemaEnum.cuerpo) {
+                                    isCatch.setListaMiembros(lexema);
+                                    posA++;
+                                    lexema = arrayLexemas.get(posA);
+                                }
 
                                 if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY) {
                                     return isCatch;
