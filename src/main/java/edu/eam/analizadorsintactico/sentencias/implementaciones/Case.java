@@ -13,26 +13,26 @@ import java.util.List;
  *
  * @author dani0
  */
-public class Case extends Sentencia{
-    
+public class Case extends Sentencia {
+
     private Lexema isCase;
 
     private Lexema comillas1;
-    
+
     private Lexema letras;
-    
+
     private Lexema operadoresAritmeticos;
-    
+
     private Lexema comillas2;
-    
+
     private Lexema equals;
-    
+
     private Lexema cuerpo;
-    
+
     private Lexema semicolon1;
-    
+
     private Lexema isBreak;
-    
+
     private Lexema semicolon2;
 
     public Case() {
@@ -132,7 +132,6 @@ public class Case extends Sentencia{
         this.semicolon2 = semicolon2;
     }
 
-   
     @Override
     public List<Sentencia> llenarHijos() {
 //        hijos = new ArrayList<>();
@@ -141,7 +140,8 @@ public class Case extends Sentencia{
 //        if (inicializacion != null) {
 //            hijos.add(new SentenciaToken(inicializacion));
 //        }
-        return hijos;    }
+        return hijos;
+    }
 
     @Override
     public String toString() {
@@ -156,5 +156,5 @@ public class Case extends Sentencia{
     public String parse() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
