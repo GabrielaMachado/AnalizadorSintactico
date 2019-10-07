@@ -28,6 +28,35 @@ public class GramaticaListaCatch implements Gramatica{
     @Override
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 
+//    public Lista<T> analizar(Gramatica gramma, Sentencia raiz, FlujoTokens flujoTokens, TipoLexemaEnum separador) {
+//
+//        List<T> sentencias = new ArrayList<>();
+//        T parametro = null;
+//        boolean go = true;
+//        do {
+//            SimboloLexico lexema = flujoTokens.avanzar();
+//            parametro = (T) gramma.analizar(raiz, flujoTokens);
+//            if (parametro != null) {
+//                sentencias.add(parametro);
+//                lexema = flujoTokens.avanzar();
+//
+//                if (lexema.getTipo() != separador) {
+//                    break;
+//                }
+//            } else {
+//                go = false;
+//            }
+//
+//        } while (go);
+//
+//        return new Lista<T>(sentencias);
+//    }
+
+
+//    @Override
+//    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
+
+
 //
 //        GramaticaCatch gramaticaCatch = new GramaticaCatch();
 //        Catch isCatch;
