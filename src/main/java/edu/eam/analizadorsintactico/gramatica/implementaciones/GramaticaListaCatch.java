@@ -16,10 +16,39 @@ import java.util.ArrayList;
  *
  * @author user
  */
-public class GramaticaListaCatch implements Gramatica {
+public class GramaticaListaCatch<T extends Sentencia> {
 
-    @Override
-    public Sentencia analizar(Sentencia padre, ArrayList<Lexema> arrayLexemas) {
+    /**
+     * Metodo que analiza el flujo de tokens buscando lista de sentencias
+     * separadas por algun token en especial.
+     *
+     * @param flujo, flujo de tokens...
+     * @return la lista de sentencias o null si no esta.
+     */
+    public Lista<T> analizar(Gramatica gramma, Sentencia raiz, FlujoTokens flujoTokens, TipoLexemaEnum separador) {
+
+        List<T> sentencias = new ArrayList<>();
+        T parametro = null;
+        boolean go = true;
+        do {
+            SimboloLexico lexema = flujoTokens.avanzar();
+            parametro = (T) gramma.analizar(raiz, flujoTokens);
+            if (parametro != null) {
+                sentencias.add(parametro);
+                lexema = flujoTokens.avanzar();
+
+                if (lexema.getTipo() != separador) {
+                    break;
+                }
+            } else {
+                go = false;
+            }
+
+        } while (go);
+
+        return new Lista<T>(sentencias);
+    }
+
 //
 //        GramaticaCatch gramaticaCatch = new GramaticaCatch();
 //        Catch isCatch;
@@ -51,6 +80,5 @@ public class GramaticaListaCatch implements Gramatica {
 //
 //        return listaParamentros;
 //    }
-        return null;
-    }
+//        return null;
 }

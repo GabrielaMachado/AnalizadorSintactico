@@ -38,82 +38,101 @@ public class Case extends Sentencia{
     public Case() {
     }
 
-//    public Case(Lexema mensaje, Lexema equals, Lexema openP, Lexema comillas, Lexema contenidoMensaje,
-//            Lexema operadoresAritmeticos, Lexema closeP, Lexema semicolon) {
-//        this.mensaje = mensaje;
-//        this.equals = equals;
-//        this.openP = openP;
-//        this.comillas = comillas;
-//        this.contenidoMensaje = contenidoMensaje;
-//        this.operadoresAritmeticos = operadoresAritmeticos;
-//        this.closeP = closeP;
-//        this.semicolon = semicolon;
-//    }
-//
-//    public Lexema getMensaje() {
-//        return mensaje;
-//    }
-//
-//    public void setMensaje(Lexema mensaje) {
-//        this.mensaje = mensaje;
-//    }
-//
-//    public Lexema getEquals() {
-//        return equals;
-//    }
-//
-//    public void setEquals(Lexema equals) {
-//        this.equals = equals;
-//    }
-//
-//    public Lexema getOpenP() {
-//        return openP;
-//    }
-//
-//    public void setOpenP(Lexema openP) {
-//        this.openP = openP;
-//    }
-//
-//    public Lexema getComillas() {
-//        return comillas;
-//    }
-//
-//    public void setComillas(Lexema comillas) {
-//        this.comillas = comillas;
-//    }
-//
-//    public Lexema getContenidoMensaje() {
-//        return contenidoMensaje;
-//    }
-//
-//    public void setContenidoMensaje(Lexema contenidoMensaje) {
-//        this.contenidoMensaje = contenidoMensaje;
-//    }
-//
-//    public Lexema getOperadoresAritmeticos() {
-//        return operadoresAritmeticos;
-//    }
-//
-//    public void setOperadoresAritmeticos(Lexema operadoresAritmeticos) {
-//        this.operadoresAritmeticos = operadoresAritmeticos;
-//    }
-//
-//    public Lexema getCloseP() {
-//        return closeP;
-//    }
-//
-//    public void setCloseP(Lexema closeP) {
-//        this.closeP = closeP;
-//    }
-//
-//    public Lexema getSemicolon() {
-//        return semicolon;
-//    }
-//
-//    public void setSemicolon(Lexema semicolon) {
-//        this.semicolon = semicolon;
-//    }
-//    
+    public Case(Lexema isCase, Lexema comillas1, Lexema letras, Lexema operadoresAritmeticos,
+            Lexema comillas2, Lexema equals, Lexema cuerpo, Lexema semicolon1, Lexema isBreak, Lexema semicolon2) {
+        this.isCase = isCase;
+        this.comillas1 = comillas1;
+        this.letras = letras;
+        this.operadoresAritmeticos = operadoresAritmeticos;
+        this.comillas2 = comillas2;
+        this.equals = equals;
+        this.cuerpo = cuerpo;
+        this.semicolon1 = semicolon1;
+        this.isBreak = isBreak;
+        this.semicolon2 = semicolon2;
+    }
+
+    public Lexema getIsCase() {
+        return isCase;
+    }
+
+    public void setIsCase(Lexema isCase) {
+        this.isCase = isCase;
+    }
+
+    public Lexema getComillas1() {
+        return comillas1;
+    }
+
+    public void setComillas1(Lexema comillas1) {
+        this.comillas1 = comillas1;
+    }
+
+    public Lexema getLetras() {
+        return letras;
+    }
+
+    public void setLetras(Lexema letras) {
+        this.letras = letras;
+    }
+
+    public Lexema getOperadoresAritmeticos() {
+        return operadoresAritmeticos;
+    }
+
+    public void setOperadoresAritmeticos(Lexema operadoresAritmeticos) {
+        this.operadoresAritmeticos = operadoresAritmeticos;
+    }
+
+    public Lexema getComillas2() {
+        return comillas2;
+    }
+
+    public void setComillas2(Lexema comillas2) {
+        this.comillas2 = comillas2;
+    }
+
+    public Lexema getEquals() {
+        return equals;
+    }
+
+    public void setEquals(Lexema equals) {
+        this.equals = equals;
+    }
+
+    public Lexema getCuerpo() {
+        return cuerpo;
+    }
+
+    public void setCuerpo(Lexema cuerpo) {
+        this.cuerpo = cuerpo;
+    }
+
+    public Lexema getSemicolon1() {
+        return semicolon1;
+    }
+
+    public void setSemicolon1(Lexema semicolon1) {
+        this.semicolon1 = semicolon1;
+    }
+
+    public Lexema getIsBreak() {
+        return isBreak;
+    }
+
+    public void setIsBreak(Lexema isBreak) {
+        this.isBreak = isBreak;
+    }
+
+    public Lexema getSemicolon2() {
+        return semicolon2;
+    }
+
+    public void setSemicolon2(Lexema semicolon2) {
+        this.semicolon2 = semicolon2;
+    }
+
+   
     @Override
     public List<Sentencia> llenarHijos() {
 //        hijos = new ArrayList<>();
@@ -126,9 +145,9 @@ public class Case extends Sentencia{
 
     @Override
     public String toString() {
-        return "mesaje:" + mensaje.getToken() + " " + equals.getToken() + " " + openP.getToken()
-                + " " + comillas.getToken() + " " + contenidoMensaje.getToken() + " " + operadoresAritmeticos.getToken()
-                + " " + closeP.getToken() + " " + semicolon.getToken();
+        return "mesaje:" + isCase.getToken() + " " + comillas1.getToken() + " " + letras.getToken()
+                + " " + operadoresAritmeticos.getToken() + " " + comillas2.getToken() + " " + equals.getToken()
+                + " " + cuerpo.getToken() + " " + semicolon1.getToken() + " " + isBreak.getToken() + " " + semicolon2.getToken();
     }
 
     @Override
