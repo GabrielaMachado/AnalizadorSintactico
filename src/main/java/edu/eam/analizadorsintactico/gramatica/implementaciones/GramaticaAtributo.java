@@ -30,7 +30,14 @@ public class GramaticaAtributo implements Gramatica {
         Lexema lexema = arrayLexemas.get(posA);
 
         //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.TD_COLOR) {
+        if (lexema.getTipo() == TipoLexemaEnum.TD_BOOLEAN ||
+                lexema.getTipo() == TipoLexemaEnum.TD_CHAR ||
+                lexema.getTipo() == TipoLexemaEnum.TD_COLOR ||
+                lexema.getTipo() == TipoLexemaEnum.TD_DOUBLE ||
+                lexema.getTipo() == TipoLexemaEnum.TD_FIGURE ||
+                lexema.getTipo() == TipoLexemaEnum.TD_INTEGER ||
+                lexema.getTipo() == TipoLexemaEnum.TD_STRING ||
+                lexema.getTipo() == TipoLexemaEnum.TD_STYLE) {
             atributo.setTipoDato(lexema);
             posA++;
             lexema = arrayLexemas.get(posA);
@@ -46,7 +53,7 @@ public class GramaticaAtributo implements Gramatica {
                     posA++;
                     lexema = arrayLexemas.get(posA);
 
-                    if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
+                    if (lexema.getToken().equals("inicializacion")) {
                         atributo.setInicializacion(lexema);
                         posA++;
                         lexema = arrayLexemas.get(posA);
