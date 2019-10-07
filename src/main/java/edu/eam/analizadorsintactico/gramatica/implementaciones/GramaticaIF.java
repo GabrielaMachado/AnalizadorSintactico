@@ -6,6 +6,7 @@
 package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
+import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
 import edu.eam.analizadorsintactico.excepciones.SintacticException;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
@@ -17,14 +18,17 @@ public class GramaticaIF implements Gramatica {
     @Override
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
         IF isIf = new IF();
-        int posI = posicionInicial;
-        int posA = posicionInicial;
+        int posI = posicion;
+        int posA = posicion;
         //primer token de la gramatica.
         Lexema lexema = arrayLexemas.get(posA);
         if (lexema.getToken().equals("condicion")) {
+            posA++;
             isIf.setIdent1(lexema);
+            lexema = arrayLexemas.get(posA);
             //derivar...
             if (lexema.getToken().equals(";")) {
+                posicion = posA;
                 //derivar...
                 return isIf;
             } else {
