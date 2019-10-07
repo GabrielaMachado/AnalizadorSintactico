@@ -7,6 +7,7 @@ package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,15 +24,14 @@ public class DoWhile extends Sentencia{
     private Lexema isWhile;    
     private Lexema openP;
     private Lexema literalBooleana;
-    private Lexema or;
-    private Lexema and;
+    private Lexema operadorLogico;
     private Lexema expresionComparacion;
     private Lexema closeP;
 
     public DoWhile() {
     }
 
-    public DoWhile(Lexema isDo, Lexema openKey, Lexema cuerpo1, Lexema closeKey, Lexema cuerpo2, Lexema isWhile, Lexema openP, Lexema literalBooleana, Lexema or, Lexema and, Lexema expresionComparacion, Lexema closeP) {
+    public DoWhile(Lexema isDo, Lexema openKey, Lexema cuerpo1, Lexema closeKey, Lexema cuerpo2, Lexema isWhile, Lexema openP, Lexema literalBooleana, Lexema operadorLogico, Lexema expresionComparacion, Lexema closeP) {
         this.isDo = isDo;
         this.openKey = openKey;
         this.cuerpo1 = cuerpo1;
@@ -40,8 +40,6 @@ public class DoWhile extends Sentencia{
         this.isWhile = isWhile;
         this.openP = openP;
         this.literalBooleana = literalBooleana;
-        this.or = or;
-        this.and = and;
         this.expresionComparacion = expresionComparacion;
         this.closeP = closeP;
     }
@@ -110,20 +108,12 @@ public class DoWhile extends Sentencia{
         this.literalBooleana = literalBooleana;
     }
 
-    public Lexema getOr() {
-        return or;
+    public Lexema getOperadorLogico() {
+        return operadorLogico;
     }
 
-    public void setOr(Lexema or) {
-        this.or = or;
-    }
-
-    public Lexema getAnd() {
-        return and;
-    }
-
-    public void setAnd(Lexema and) {
-        this.and = and;
+    public void setOperadorLogico(Lexema operadorLogico) {
+        this.operadorLogico = operadorLogico;
     }
 
     public Lexema getExpresionComparacion() {
@@ -144,9 +134,14 @@ public class DoWhile extends Sentencia{
     
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
+        hijos = new ArrayList<>();
+        hijos.add(new SentenciaLexema(isDo));
+        hijos.add(new SentenciaLexema(cuerpo1));
+        hijos.add(new SentenciaLexema(cuerpo2));
+        hijos.add(new SentenciaLexema(isWhile));
+        hijos.add(new SentenciaLexema(literalBooleana));
+        hijos.add(new SentenciaLexema(operadorLogico));
+        hijos.add(new SentenciaLexema(expresionComparacion));
 //        if (inicializacion != null) {
 //            hijos.add(new SentenciaToken(inicializacion));
 //        }
@@ -156,8 +151,8 @@ public class DoWhile extends Sentencia{
     public String toString() {
         return "dowhile:" + isDo.getToken() + " " + openKey.getToken() + " " + cuerpo1.getToken()
                 + " " + closeKey.getToken() + " " + cuerpo2.getToken() + " " + isWhile.getToken()
-                + " " + openP.getToken() + " " + literalBooleana.getToken()+ " " + or.getToken()
-                + " " + and.getToken()+ " " + expresionComparacion.getToken()+ " " + closeP.getToken();
+                + " " + openP.getToken() + " " + literalBooleana.getToken()+ " " + operadorLogico.getToken()
+                + " " + expresionComparacion.getToken()+ " " + closeP.getToken();
     }
 
     @Override
