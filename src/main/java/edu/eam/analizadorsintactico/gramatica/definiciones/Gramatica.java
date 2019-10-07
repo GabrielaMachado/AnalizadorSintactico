@@ -5,6 +5,7 @@
  */
 package edu.eam.analizadorsintactico.gramatica.definiciones;
 
+import edu.eam.analizadorlexicos.FlujoTokens;
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public interface Gramatica {
      */
     public int posicionInicial = 0;
 
-    Sentencia analizar(ArrayList<Lexema> arrayLexemas);
+    Sentencia analizar(FlujoTokens flujoTokens);
+
 
 }

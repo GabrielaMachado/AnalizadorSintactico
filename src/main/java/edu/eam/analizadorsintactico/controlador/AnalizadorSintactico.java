@@ -5,6 +5,7 @@
  */
 package edu.eam.analizadorsintactico.controlador;
 
+import edu.eam.analizadorlexicos.FlujoTokens;
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.gramatica.implementaciones.GramaticaMain;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.SentenciaMain;
@@ -20,9 +21,13 @@ public class AnalizadorSintactico {
     
     public static void verificarGramaticas(ArrayList<Lexema> listaLexemas){
 
+                
+        FlujoTokens flujoTokens = new FlujoTokens(listaLexemas);
+        
+
         GramaticaMain gramaticaMain = new GramaticaMain();
         
-     main = (SentenciaMain) gramaticaMain.analizar(listaLexemas);
+     main = (SentenciaMain) gramaticaMain.analizar(flujoTokens);
     }
 
     public static SentenciaMain getMain() {

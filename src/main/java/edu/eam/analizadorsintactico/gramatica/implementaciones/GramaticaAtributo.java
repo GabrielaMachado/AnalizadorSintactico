@@ -5,6 +5,7 @@
  */
 package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
+import edu.eam.analizadorlexicos.FlujoTokens;
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
@@ -19,39 +20,37 @@ import java.util.ArrayList;
 public class GramaticaAtributo implements Gramatica {
 
     @Override
-    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
+    public Sentencia analizar(FlujoTokens flujoTokens) {
 //Sentencia a retornar....
         Atributo atributo = new Atributo();
         //  flujoTokens.guardarPosicion();
         int posI = posicionInicial;
         int posA = posicionInicial;
         //primer token de la gramatica.
-        Lexema lexema = arrayLexemas.get(posA);
+        flujoTokens.guardarPosicion();
+        Lexema lexema = flujoTokens.getTokenActual();
 
         //tipo de dato.....
         if (lexema.getTipo() == TipoLexemaEnum.TIPO_DATO) {
             atributo.setTipoDato(lexema);
-            posA++;
-            lexema = arrayLexemas.get(posA);
+            lexema = flujoTokens.avanzar();
 
             //nombre del atributo....
             if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
                 atributo.setIdent(lexema);
-                posA++;
-                lexema = arrayLexemas.get(posA);
+                lexema = flujoTokens.avanzar();
 
                 if (lexema.getTipo() == TipoLexemaEnum.ASIGNACION) {
                     atributo.setEquals(lexema);
-                    posA++;
-                    lexema = arrayLexemas.get(posA);
+                    lexema = flujoTokens.avanzar();
 
                     if (lexema.getTipo() == TipoLexemaEnum.INICIALIZACION) {
                         atributo.setInicializacion(lexema);
-                        posA++;
-                        lexema = arrayLexemas.get(posA);
+                        lexema = flujoTokens.avanzar();
 
                         if (lexema.getTipo() == TipoLexemaEnum.DELIMITADOR) {
                             //derivar...
+                            flujoTokens.backTrack();
                             return atributo;
                         } else {
                             //si no es identificador, no es atributo, se retorna el flujo a 
@@ -60,17 +59,17 @@ public class GramaticaAtributo implements Gramatica {
                             return null; //se retorna null para que se pruebe con otra regal..
                         }
                     } else {
-                        posA = posI;
+                        flujoTokens.backTrack();
                         return null; //
                     }
                 } else {
-                    posA = posI;
+                    flujoTokens.backTrack();
                     return null; //s
                 }
             } else {
                 //si no es identificador, no es atributo, se retorna el flujo a 
                 //la posicion inicial
-                posA = posI;
+                flujoTokens.backTrack();
                 return null; //se retorna null para que se pruebe con otra regal..
             }
 

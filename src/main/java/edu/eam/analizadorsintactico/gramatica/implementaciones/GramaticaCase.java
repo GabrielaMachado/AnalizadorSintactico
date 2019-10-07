@@ -5,6 +5,7 @@
  */
 package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
+import edu.eam.analizadorlexicos.FlujoTokens;
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class GramaticaCase implements Gramatica {
 
     @Override
-    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
+    public Sentencia analizar(FlujoTokens flujoTokens) {
 //Sentencia a retornar....
         Case isCase = new Case();
         //  flujoTokens.guardarPosicion();

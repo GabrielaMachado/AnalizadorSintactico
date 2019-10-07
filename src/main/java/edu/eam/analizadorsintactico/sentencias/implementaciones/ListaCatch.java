@@ -79,8 +79,6 @@ public class ListaCatch <T extends Sentencia> extends Sentencia{
 //		return str.toString();
 //	}
 
-
-    
     @Override
     public List<Sentencia> llenarHijos() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

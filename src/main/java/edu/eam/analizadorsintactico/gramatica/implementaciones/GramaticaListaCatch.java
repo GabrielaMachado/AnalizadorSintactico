@@ -5,6 +5,7 @@
  */
 package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
+import edu.eam.analizadorlexicos.FlujoTokens;
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
@@ -16,7 +17,12 @@ import java.util.ArrayList;
  *
  * @author user
  */
-public class GramaticaListaCatch implements Gramatica{
+public class GramaticaListaCatch implements Gramatica {
+
+    @Override
+    public Sentencia analizar(FlujoTokens flujoTokens) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     /**
      * Metodo que analiza el flujo de tokens buscando lista de sentencias
@@ -25,10 +31,6 @@ public class GramaticaListaCatch implements Gramatica{
      * @param flujo, flujo de tokens...
      * @return la lista de sentencias o null si no esta.
      */
-    @Override
-    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
-
-
 //    public Lista<T> analizar(Gramatica gramma, Sentencia raiz, FlujoTokens flujoTokens, TipoLexemaEnum separador) {
 //
 //        List<T> sentencias = new ArrayList<>();
@@ -52,12 +54,8 @@ public class GramaticaListaCatch implements Gramatica{
 //
 //        return new Lista<T>(sentencias);
 //    }
-
-
 //    @Override
 //    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
-
-
 //
 //        GramaticaCatch gramaticaCatch = new GramaticaCatch();
 //        Catch isCatch;
@@ -89,9 +87,6 @@ public class GramaticaListaCatch implements Gramatica{
 //
 //        return listaParamentros;
 //    }
-
-        return null;
-    }
-
-
+//        return null;
+//    }
 }

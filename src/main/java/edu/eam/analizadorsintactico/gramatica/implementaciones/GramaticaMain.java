@@ -5,6 +5,7 @@
  */
 package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
+import edu.eam.analizadorlexicos.FlujoTokens;
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
@@ -20,57 +21,55 @@ import java.util.ArrayList;
 public class GramaticaMain implements Gramatica {
 
     @Override
-    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
+
+    public Sentencia analizar(FlujoTokens flujoTokens) {
 //Sentencia a retornar....
         SentenciaMain sentenciaMain = new SentenciaMain();
-        //  flujoTokens.guardarPosicion();
-        int posI = posicion;
-        int posA = posicion;
-        //primer token de la gramatica.
-        Lexema lexema = arrayLexemas.get(posA);
+        flujoTokens.guardarPosicion();
+        Lexema lexema = flujoTokens.getTokenActual();
+
 
         //tipo de dato.....
         if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
             sentenciaMain.setMain(lexema);
-            posA++;
-            lexema = arrayLexemas.get(posA);
+            lexema = flujoTokens.avanzar();
 
             //nombre del atributo....
             if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENKEY) {
                 sentenciaMain.setOpenKey(lexema);
-                posA++;
-                lexema = arrayLexemas.get(posA);
+                lexema = flujoTokens.avanzar();
 
                 if (lexema.getToken().equals("cuerpo")) {
                     sentenciaMain.setCuerpo(lexema);
-                    posA++;
-                    lexema = arrayLexemas.get(posA);
+                    lexema = flujoTokens.avanzar();
 
                     if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY) {
                         sentenciaMain.setCloseKey(lexema);
-                        posA++;
-                        lexema = arrayLexemas.get(posA);
+                        lexema = flujoTokens.avanzar();
 
                         if (lexema.getToken().equals(";")) {
-                            posicionInicial++;
+                            System.out.println("Lexema: "+ lexema.getToken()+ "   entró al if");
+                            flujoTokens.avanzar();                            
                             return sentenciaMain;
                         } else {
-                            posA = posI;
+                            System.out.println("Lexema: "+ lexema.getToken()+ "   entró al else");
+                            flujoTokens.backTrack();
                             return null;
                         }
 
+
                     } else {
-                        posA = posI;
+                        flujoTokens.backTrack();
                         return null; //
                     }
                 } else {
-                    posA = posI;
+                    flujoTokens.backTrack();
                     return null; //s
                 }
             } else {
                 //si no es identificador, no es atributo, se retorna el flujo a 
                 //la posicion inicial
-                posA = posI;
+                flujoTokens.backTrack();
                 return null; //se retorna null para que se pruebe con otra regal..
             }
 
