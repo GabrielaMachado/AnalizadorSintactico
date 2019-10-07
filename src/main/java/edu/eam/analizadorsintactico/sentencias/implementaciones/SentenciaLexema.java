@@ -5,28 +5,45 @@
  */
 package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
+import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author dani0
+ * @author user
  */
-public class LlamadoFuncion extends Sentencia{
+public class SentenciaLexema extends Sentencia{
+    private Lexema simbolo;
+
+    public SentenciaLexema() {
+    }
+
+    public SentenciaLexema(Lexema simbolo) {
+        this.simbolo = simbolo;
+    }
 
     @Override
     public List<Sentencia> llenarHijos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ArrayList<>();
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        return simbolo.getTipo() + ":" + simbolo.getToken();
+
+    }
+
+    public Lexema getSimbolo() {
+        return simbolo;
     }
 
     @Override
     public String parse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // TODO Auto-generated method stub
+        return null;
     }
-    
+
 }

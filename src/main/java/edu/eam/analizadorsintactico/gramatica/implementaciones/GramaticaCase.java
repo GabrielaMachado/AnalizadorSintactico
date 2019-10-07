@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class GramaticaCase implements Gramatica {
 
     @Override
-    public Sentencia analizar(Sentencia padre, ArrayList<Lexema> arrayLexemas) {
+    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 //Sentencia a retornar....
         Case isCase = new Case();
         //  flujoTokens.guardarPosicion();

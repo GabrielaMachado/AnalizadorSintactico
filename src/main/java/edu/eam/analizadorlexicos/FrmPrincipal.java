@@ -10,6 +10,7 @@ import static edu.eam.analizadorlexicos.AnalizadorLexico.verificarAutomatas;
 import static edu.eam.analizadorlexicos.AnalizadorLexico.posActual;
 import static edu.eam.analizadorlexicos.AnalizadorLexico.posInicial;
 import edu.eam.analizadorsintactico.controlador.AnalizadorSintactico;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.SentenciaMain;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultTreeModel;
@@ -183,10 +184,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
             lista = verificarAutomatas(cadena);
         }
         jTable1.setModel(llenarTabla());
-        
-       // Main main = AnalizadorSintactico.getMain();
-    //    main.llenarHijos();
-      //  jTree1.setModel(new DefaultTreeModel(main));
+        AnalizadorSintactico.verificarGramaticas(lista);
+        SentenciaMain main = AnalizadorSintactico.getMain();
+        main.llenarHijos();
+        jTree1.setModel(new DefaultTreeModel(main));
        
     }//GEN-LAST:event_btnAnalizarActionPerformed
 

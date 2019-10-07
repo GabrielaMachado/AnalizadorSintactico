@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  * @author user
  */
-public class GramaticaListaCatch<T extends Sentencia> {
+public class GramaticaListaCatch implements Gramatica{
 
     /**
      * Metodo que analiza el flujo de tokens buscando lista de sentencias
@@ -25,29 +25,8 @@ public class GramaticaListaCatch<T extends Sentencia> {
      * @param flujo, flujo de tokens...
      * @return la lista de sentencias o null si no esta.
      */
-    public Lista<T> analizar(Gramatica gramma, Sentencia raiz, FlujoTokens flujoTokens, TipoLexemaEnum separador) {
-
-        List<T> sentencias = new ArrayList<>();
-        T parametro = null;
-        boolean go = true;
-        do {
-            SimboloLexico lexema = flujoTokens.avanzar();
-            parametro = (T) gramma.analizar(raiz, flujoTokens);
-            if (parametro != null) {
-                sentencias.add(parametro);
-                lexema = flujoTokens.avanzar();
-
-                if (lexema.getTipo() != separador) {
-                    break;
-                }
-            } else {
-                go = false;
-            }
-
-        } while (go);
-
-        return new Lista<T>(sentencias);
-    }
+    @Override
+    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 
 //
 //        GramaticaCatch gramaticaCatch = new GramaticaCatch();
@@ -80,5 +59,6 @@ public class GramaticaListaCatch<T extends Sentencia> {
 //
 //        return listaParamentros;
 //    }
-//        return null;
+        return null;
+    }
 }

@@ -6,6 +6,7 @@
 package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,19 +15,43 @@ import java.util.List;
  */
 public class ListaMiembros<T extends Sentencia> extends Sentencia{
 
+    private final List<T> listaMiembros;
+
+    public ListaMiembros(List<T> miembros) {
+        this.listaMiembros = miembros;
+    }
+
+    public ListaMiembros() {
+        listaMiembros = new ArrayList<>();
+    }
+    
+        
+    public void add(T sentencia) {
+        listaMiembros.add(sentencia);
+    }
+
+    public List<T> getSentencias() {
+        return listaMiembros;
+    }
+        
+
     @Override
     public List<Sentencia> llenarHijos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        hijos = new ArrayList<>();
+        listaMiembros.forEach((t) -> {
+            hijos.add(t);
+        });
+        return hijos;
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        return "Lista de sentencias";
+    }    
 
     @Override
     public String parse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "";
     }
     
 }

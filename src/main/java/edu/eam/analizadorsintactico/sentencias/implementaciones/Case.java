@@ -145,9 +145,11 @@ public class Case extends Sentencia{
 
     @Override
     public String toString() {
+
         return "mesaje:" + isCase.getToken() + " " + comillas1.getToken() + " " + letras.getToken()
                 + " " + operadoresAritmeticos.getToken() + " " + comillas2.getToken() + " " + equals.getToken()
                 + " " + cuerpo.getToken() + " " + semicolon1.getToken() + " " + isBreak.getToken() + " " + semicolon2.getToken();
+
     }
 
     @Override

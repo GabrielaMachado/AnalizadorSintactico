@@ -26,8 +26,8 @@ public interface Gramatica {
      * @return null si no representa la derivacion esta gramatica o un objeto de
      * la gramatica en cuestion.
      */
-    public static int posicionInicial = 0;
+    public int posicionInicial = 0;
 
-    Sentencia analizar(Sentencia padre, ArrayList<Lexema> arrayLexemas);
+    Sentencia analizar(ArrayList<Lexema> arrayLexemas);
 
 }

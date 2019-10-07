@@ -10,6 +10,8 @@ import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Catch;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.ListaMiembros;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.Miembro;
 import java.util.ArrayList;
 
 /**
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 public class GramaticaCatch implements Gramatica {
 
     @Override
-    public Sentencia analizar(Sentencia padre, ArrayList<Lexema> arrayLexemas) {
+    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
         //Sentencia a retornar....
         Catch isCatch = new Catch();
         //  flujoTokens.guardarPosicion();
@@ -60,11 +62,14 @@ public class GramaticaCatch implements Gramatica {
                                 posA++;
                                 lexema = arrayLexemas.get(posA);
 
-                                if (lexema.getTipo() == TipoLexemaEnum.TIPO_DATO) {
-                                    isCatch.setListaMiembros(lexema);
-                                    posA++;
-                                    lexema = arrayLexemas.get(posA);
-                                }
+                                
+//                                 ListaMiembros<Miembro> listaMiembros = (ListaMiembros<Miembro>) GramaticaListaMiembro.analizar(lexema);
+//        main.setListaSentencia(listaSentencias);
+//                                if (lexema.getTipo() == TipoLexemaEnum.TIPO_DATO) {
+//                                    isCatch.setListaMiembros(lexema);
+//                                    posA++;
+//                                    lexema = arrayLexemas.get(posA);
+//                                }
 
                                 if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY) {
                                     return isCatch;
