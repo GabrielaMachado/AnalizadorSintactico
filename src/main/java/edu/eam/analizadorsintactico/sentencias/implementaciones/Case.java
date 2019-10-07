@@ -7,32 +7,33 @@ package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author dani0
  */
-public class Case extends Sentencia{
-    
+public class Case extends Sentencia {
+
     private Lexema isCase;
 
     private Lexema comillas1;
-    
+
     private Lexema letras;
-    
+
     private Lexema operadoresAritmeticos;
-    
+
     private Lexema comillas2;
-    
+
     private Lexema equals;
-    
+
     private Lexema cuerpo;
-    
+
     private Lexema semicolon1;
-    
+
     private Lexema isBreak;
-    
+
     private Lexema semicolon2;
 
     public Case() {
@@ -131,16 +132,18 @@ public class Case extends Sentencia{
     public void setSemicolon2(Lexema semicolon2) {
         this.semicolon2 = semicolon2;
     }
-   
+
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
+        hijos = new ArrayList<>();
+        hijos.add(new SentenciaLexema(isCase));
+        hijos.add(new SentenciaLexema(letras));
+        hijos.add(new SentenciaLexema(cuerpo));
 //        if (inicializacion != null) {
-//            hijos.add(new SentenciaToken(inicializacion));
+//            hijos.add(new SentenciaLexema(inicializacion));
 //        }
-        return hijos;    }
+        return hijos;
+    }
 
     @Override
     public String toString() {
@@ -155,5 +158,5 @@ public class Case extends Sentencia{
     public String parse() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
