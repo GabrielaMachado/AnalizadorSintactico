@@ -9,10 +9,8 @@ import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
-import static edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica.posicionInicial;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.DoWhile;
-import edu.eam.analizadorsintactico.sentencias.implementaciones.While;
 import java.util.ArrayList;
 
 /**
@@ -71,16 +69,12 @@ public class GramaticaDoWhile implements Gramatica {
                                         isDoWhile.setLiteralBooleana(lexema);
                                         posA++;
                                         lexema = arrayLexemas.get(posA);
-                                        if (lexema.getTipo() == TipoLexemaEnum.OP_LOG_OR) {
-                                            isDoWhile.setOr(lexema);
+                                        if (lexema.getTipo() == TipoLexemaEnum.OP_LOG_OR || lexema.getTipo() == TipoLexemaEnum.OP_LOG_AND) {
+                                            isDoWhile.setOperadorLogico(lexema);
                                             posA++;
                                             lexema = arrayLexemas.get(posA);
-                                            if (lexema.getTipo() == TipoLexemaEnum.OP_LOG_AND) {
-                                                isDoWhile.setAnd(lexema);
-                                                posA++;
-                                                lexema = arrayLexemas.get(posA);
-                                                if (lexema.getTipo() == TipoLexemaEnum.OP_LOG_OR/*expreCompa*/) {
-                                                    isDoWhile.setOr(lexema);
+                                                if (lexema.getToken().equals("expreion comparcion")) {
+                                                    isDoWhile.setExpresionComparacion(lexema);
                                                     posA++;
                                                     lexema = arrayLexemas.get(posA);
                                                     if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEP) {
@@ -97,10 +91,6 @@ public class GramaticaDoWhile implements Gramatica {
                                                     posA = posI;
                                                     return null; //
                                                 }
-                                            } else {
-                                                posA = posI;
-                                                return null; //
-                                            }
                                         } else {
                                             posA = posI;
                                             return null; //
