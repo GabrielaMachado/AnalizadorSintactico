@@ -29,13 +29,13 @@ public class GramaticaInstancia implements Gramatica {
         Lexema lexema = arrayLexemas.get(posA);
 
         //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
+        if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
             instancia.setIdent1(lexema);
             posA++;
             lexema = arrayLexemas.get(posA);
 
             //nombre del atributo....
-            if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
+            if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
                 instancia.setIdent2(lexema);
                 posA++;
                 lexema = arrayLexemas.get(posA);
@@ -50,7 +50,7 @@ public class GramaticaInstancia implements Gramatica {
                         posA++;
                         lexema = arrayLexemas.get(posA);
 
-                        if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
+                        if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
                             instancia.setIdent3(lexema);
                             posA++;
                             lexema = arrayLexemas.get(posA);

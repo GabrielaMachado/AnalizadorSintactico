@@ -28,18 +28,18 @@ public class GramaticaCondicion implements Gramatica {
         Lexema lexema = arrayLexemas.get(posA);
 
         //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
+        if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
             condicion.setIdent1(lexema);
             posA++;
             lexema = arrayLexemas.get(posA);
 
             //nombre del atributo....
-            if (lexema.getTipo() == TipoLexemaEnum.O_RELACIONAL.toString()) {
+            if (lexema.getTipo() == TipoLexemaEnum.O_RELACIONAL) {
                 condicion.setOperadoresRelacionales(lexema);
                 posA++;
                 lexema = arrayLexemas.get(posA);
 
-                if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString() || lexema.getTipo() == TipoLexemaEnum.NUMERO.toString()) {
+                if (lexema.getTipo() == TipoLexemaEnum.IDENT || lexema.getTipo() == TipoLexemaEnum.NUMERO) {
                     condicion.setIdent2(lexema);
                     posA++;
                     lexema = arrayLexemas.get(posA);

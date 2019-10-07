@@ -29,23 +29,23 @@ public class GramaticaAtributo implements Gramatica {
         Lexema lexema = arrayLexemas.get(posA);
 
         //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.TIPO_DATO.toString()) {
+        if (lexema.getTipo() == TipoLexemaEnum.TIPO_DATO) {
             atributo.setTipoDato(lexema);
             posA++;
             lexema = arrayLexemas.get(posA);
 
             //nombre del atributo....
-            if (lexema.getTipo() == TipoLexemaEnum.IDENT.toString()) {
+            if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
                 atributo.setIdent(lexema);
                 posA++;
                 lexema = arrayLexemas.get(posA);
 
-                if (lexema.getTipo() == TipoLexemaEnum.ASIGNACION.toString()) {
+                if (lexema.getTipo() == TipoLexemaEnum.ASIGNACION) {
                     atributo.setEquals(lexema);
                     posA++;
                     lexema = arrayLexemas.get(posA);
 
-                    if (lexema.getTipo() == TipoLexemaEnum.INICIALIZACION.toString()) {
+                    if (lexema.getTipo() == TipoLexemaEnum.INICIALIZACION) {
                         atributo.setInicializacion(lexema);
                         posA++;
                         lexema = arrayLexemas.get(posA);
