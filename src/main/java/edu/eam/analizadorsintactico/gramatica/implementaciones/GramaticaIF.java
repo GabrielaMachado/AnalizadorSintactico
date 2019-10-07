@@ -9,14 +9,39 @@ import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.excepciones.SintacticException;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.IF;
 import java.util.ArrayList;
 
 public class GramaticaIF implements Gramatica {
 
     @Override
-    public Sentencia analizar(Sentencia padre, ArrayList<Lexema> arrayLexemas) {
-        return null;
+    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
+        IF isIf = new IF();
+        int posI = posicionInicial;
+        int posA = posicionInicial;
+        //primer token de la gramatica.
+        Lexema lexema = arrayLexemas.get(posA);
+        if (lexema.getToken().equals("condicion")) {
+            isIf.setIdent1(lexema);
+            //derivar...
+            if (lexema.getToken().equals(";")) {
+                //derivar...
+                return isIf;
+            } else {
+                //si no es identificador, no es atributo, se retorna el flujo a 
+                //la posicion inicial
+                posA = posI;
+                return null; //se retorna null para que se pruebe con otra regal..
+            }
+        } else {
+            //si no es identificador, no es atributo, se retorna el flujo a 
+            //la posicion inicial
+            posA = posI;
+            return null; //se retorna null para que se pruebe con otra regal..
+        }
+
     }
+}
 //	@Override
 //	public Sentencia analizar(Sentencia padre, FlujoTokens flujoTokens) {
 //
@@ -56,6 +81,4 @@ public class GramaticaIF implements Gramatica {
 //	 * boolean a = x<10 && y>20
 //	 * 
 //
-
-}
 

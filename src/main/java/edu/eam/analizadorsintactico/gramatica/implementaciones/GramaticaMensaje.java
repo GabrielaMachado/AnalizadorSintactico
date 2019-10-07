@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class GramaticaMensaje implements Gramatica{
     
     @Override
-    public Sentencia analizar(Sentencia padre, ArrayList<Lexema> arrayLexemas) {
+    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 //Sentencia a retornar....
         Mensaje mensaje = new Mensaje();
         //  flujoTokens.guardarPosicion();

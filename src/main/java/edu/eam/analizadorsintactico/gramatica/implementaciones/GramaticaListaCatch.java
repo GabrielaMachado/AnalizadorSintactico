@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class GramaticaListaCatch implements Gramatica {
 
     @Override
-    public Sentencia analizar(Sentencia padre, ArrayList<Lexema> arrayLexemas) {
+    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 //
 //        GramaticaCatch gramaticaCatch = new GramaticaCatch();
 //        Catch isCatch;

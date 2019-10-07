@@ -126,9 +126,10 @@ public class Case extends Sentencia{
 
     @Override
     public String toString() {
-        return "mesaje:" + mensaje.getToken() + " " + equals.getToken() + " " + openP.getToken()
-                + " " + comillas.getToken() + " " + contenidoMensaje.getToken() + " " + operadoresAritmeticos.getToken()
-                + " " + closeP.getToken() + " " + semicolon.getToken();
+        return null;
+//        return "mesaje:" + mensaje.getToken() + " " + equals.getToken() + " " + openP.getToken()
+//                + " " + comillas.getToken() + " " + contenidoMensaje.getToken() + " " + operadoresAritmeticos.getToken()
+//                + " " + closeP.getToken() + " " + semicolon.getToken();
     }
 
     @Override

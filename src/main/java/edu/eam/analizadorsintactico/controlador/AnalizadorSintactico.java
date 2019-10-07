@@ -6,6 +6,8 @@
 package edu.eam.analizadorsintactico.controlador;
 
 import edu.eam.analizadorlexicos.Lexema;
+import edu.eam.analizadorsintactico.gramatica.implementaciones.GramaticaMain;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.SentenciaMain;
 import java.util.ArrayList;
 
 /**
@@ -13,20 +15,21 @@ import java.util.ArrayList;
  * @author user
  */
 public class AnalizadorSintactico {
-   //  private Main main;     
+    public static int posicion = 0;
+     public static SentenciaMain main;     
     
-    public void verificarGramaticas(ArrayList<Lexema> listaLexemas){
+    public static void verificarGramaticas(ArrayList<Lexema> listaLexemas){
 
-   //     GramaticaMain gramaticaMain = new GramaticaMain();
+        GramaticaMain gramaticaMain = new GramaticaMain();
         
-      //  main = (Main) gramaticaMain.analizar(listaLexemas);
+     main = (SentenciaMain) gramaticaMain.analizar(listaLexemas);
     }
 
-//    public Main getMain() {
-//        return main;
-//    }
-//
-//    public void setMain(Main main) {
-//        this.main = main;
-//    }
+    public static SentenciaMain getMain() {
+        return main;
+    }
+
+    public void setMain(SentenciaMain main) {
+        this.main = main;
+    }
 }
