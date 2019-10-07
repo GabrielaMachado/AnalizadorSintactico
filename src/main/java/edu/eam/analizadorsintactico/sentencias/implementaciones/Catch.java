@@ -21,21 +21,19 @@ public class Catch extends Sentencia {
     private Lexema ident2;
     private Lexema closeP;
     private Lexema openKey;
-    private Lexema cuerpo;
     private Lexema closeKey;
     private ListaMiembros<Miembro> listaMiembros;
 
     public Catch() {
     }
 
-    public Catch(Lexema isCatch, Lexema openP, Lexema ident1, Lexema ident2, Lexema closeP, Lexema openKey, Lexema cuerpo, Lexema closeKey, ListaMiembros<Miembro> listaMiembros) {
+    public Catch(Lexema isCatch, Lexema openP, Lexema ident1, Lexema ident2, Lexema closeP, Lexema openKey, Lexema closeKey, ListaMiembros<Miembro> listaMiembros) {
         this.isCatch = isCatch;
         this.openP = openP;
         this.ident1 = ident1;
         this.ident2 = ident2;
         this.closeP = closeP;
         this.openKey = openKey;
-        this.cuerpo = cuerpo;
         this.closeKey = closeKey;
         this.listaMiembros = listaMiembros;
     }
