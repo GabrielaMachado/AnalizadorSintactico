@@ -37,7 +37,7 @@ public class Atributo extends Sentencia {
     public Atributo(Lexema tipoDato, Lexema ident, Lexema equals, Lexema inicializacion) {
         this.tipoDato = tipoDato;
         this.ident = ident;
-        this.equals = ident;
+        this.equals = equals;
         this.inicializacion = inicializacion;
     }
 
