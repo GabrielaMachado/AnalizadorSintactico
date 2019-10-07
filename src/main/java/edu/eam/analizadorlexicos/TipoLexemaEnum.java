@@ -59,6 +59,7 @@ public enum TipoLexemaEnum {
     OP_ART_MINUS,
     OP_ART_TIME,
     OP_ART_DIVIDED,
+    OPERADORARITMETICO,
     COMMENTARY,
     OP_LOG_GTHAN,
     OP_LOG_LTHAN,
