@@ -15,33 +15,28 @@ import java.util.List;
  */
 public class Catch extends Sentencia {
 
-    /**
-     * Modificador de acceso del metodo.
-     */
     private Lexema isCatch;
-    private Lexema openKey;
     private Lexema openP;
-
     private Lexema ident1;
-    /**
-     * Nombre del metodo
-     */
     private Lexema ident2;
-    private Lexema closeKey;
     private Lexema closeP;
+    private Lexema openKey;
+    private Lexema cuerpo;
+    private Lexema closeKey;
     private ListaMiembros<Miembro> listaMiembros;
 
     public Catch() {
     }
 
-    public Catch(Lexema isCatch, Lexema openKey, Lexema openP, Lexema ident1, Lexema ident2, Lexema closeKey, Lexema closeP, ListaMiembros<Miembro> listaMiembros) {
+    public Catch(Lexema isCatch, Lexema openP, Lexema ident1, Lexema ident2, Lexema closeP, Lexema openKey, Lexema cuerpo, Lexema closeKey, ListaMiembros<Miembro> listaMiembros) {
         this.isCatch = isCatch;
-        this.openKey = openKey;
         this.openP = openP;
         this.ident1 = ident1;
         this.ident2 = ident2;
-        this.closeKey = closeKey;
         this.closeP = closeP;
+        this.openKey = openKey;
+        this.cuerpo = cuerpo;
+        this.closeKey = closeKey;
         this.listaMiembros = listaMiembros;
     }
 
@@ -109,16 +104,22 @@ public class Catch extends Sentencia {
         this.listaMiembros = listaMiembros;
     }
 
-    
-    
     @Override
     public List<Sentencia> llenarHijos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        hijos = new ArrayList<>();
+//        hijos.add(new SentenciaToken(tipoDato));
+//        hijos.add(new SentenciaToken(ident));
+//        if (inicializacion != null) {
+//            hijos.add(new SentenciaToken(inicializacion));
+//        }
+        return hijos;
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "catch:" + isCatch.getToken() + " " + openP.getToken() + " " + ident1.getToken()
+                + " " + ident2.getToken() + " " + closeP.getToken() + " " + openKey.getToken()
+                + " " + cuerpo.getToken() + " " + closeKey.getToken();
     }
 
     @Override

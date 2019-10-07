@@ -6,17 +6,19 @@
 package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
+import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Catch;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.ListaCatch;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author user
  */
-public class GramaticaListaCatch implements Gramatica{
+public class GramaticaListaCatch<T extends Sentencia>{
 
     /**
      * Metodo que analiza el flujo de tokens buscando lista de sentencias
@@ -25,8 +27,34 @@ public class GramaticaListaCatch implements Gramatica{
      * @param flujo, flujo de tokens...
      * @return la lista de sentencias o null si no esta.
      */
-    @Override
-    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
+//    @Override
+//    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
+//        
+//    }
+        
+    public ListaCatch<T> analizar(Gramatica gramma, Sentencia raiz, FlujoTokens flujoTokens, TipoLexemaEnum separador) {
+
+        List<T> sentencias = new ArrayList<>();
+        T parametro = null;
+        boolean go = true;
+        do {
+            Lexema lexema = flujoTokens.avanzar();
+            parametro = (T) gramma.analizar(raiz, flujoTokens);
+            if (parametro != null) {
+                sentencias.add(parametro);
+                lexema = flujoTokens.avanzar();
+
+                if (lexema.getTipo() != separador) {
+                    break;
+                }
+            } else {
+                go = false;
+            }
+
+        } while (go);
+
+        return new ListaCatch<T>(sentencias);
+    }
 
 //
 //        GramaticaCatch gramaticaCatch = new GramaticaCatch();
@@ -59,6 +87,6 @@ public class GramaticaListaCatch implements Gramatica{
 //
 //        return listaParamentros;
 //    }
-        return null;
-    }
+//        return null;
+//    }
 }
