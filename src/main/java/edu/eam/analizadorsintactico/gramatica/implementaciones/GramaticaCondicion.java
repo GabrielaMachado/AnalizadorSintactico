@@ -7,6 +7,7 @@ package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorlexicos.TipoLexemaEnum;
+import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Condicion;
@@ -22,8 +23,8 @@ public class GramaticaCondicion implements Gramatica {
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
         Condicion condicion = new Condicion();
         //  flujoTokens.guardarPosicion();
-        int posI = posicionInicial;
-        int posA = posicionInicial;
+        int posI = posicion;
+        int posA = posicion;
         //primer token de la gramatica.
         Lexema lexema = arrayLexemas.get(posA);
 
@@ -46,6 +47,7 @@ public class GramaticaCondicion implements Gramatica {
 
                     if (lexema.getToken().equals(";")) {
                         //derivar...
+                        posicion = posA;
                         return condicion;
                     } else {
                         //si no es identificador, no es atributo, se retorna el flujo a 

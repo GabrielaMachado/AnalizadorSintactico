@@ -7,6 +7,7 @@ package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -78,9 +79,9 @@ public class Condicion extends Sentencia {
 
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
+        hijos = new ArrayList<>();
+        hijos.add(new SentenciaLexema(ident1));
+        hijos.add(new SentenciaLexema(ident2));
 //        if (inicializacion != null) {
 //            hijos.add(new SentenciaToken(inicializacion));
 //        }

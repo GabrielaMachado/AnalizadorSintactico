@@ -5,43 +5,25 @@
  */
 package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
-<<<<<<< HEAD
-=======
 import edu.eam.analizadorlexicos.Lexema;
->>>>>>> gramaticas 6
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author dani0
  */
-public class LlamadoFuncion extends Sentencia{
-<<<<<<< HEAD
+public class LlamadoFuncion extends Sentencia {
 
-    @Override
-    public List<Sentencia> llenarHijos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String toString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String parse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
-    
     private Lexema ident;
 
     private Lexema openP;
-    
+
     private Lexema ident2;
-    
+
     private Lexema coma;
-    
+
     private Lexema closeP;
 
     public LlamadoFuncion() {
@@ -93,18 +75,18 @@ public class LlamadoFuncion extends Sentencia{
 
     public void setCloseP(Lexema closeP) {
         this.closeP = closeP;
->>>>>>> gramaticas 6
     }
-    
+
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
+        hijos = new ArrayList<>();
+        hijos.add(new SentenciaLexema(ident));
+        hijos.add(new SentenciaLexema(ident2));
 //        if (inicializacion != null) {
-//            hijos.add(new SentenciaToken(inicializacion));
+//            hijos.add(new SentenciaLexema(inicializacion));
 //        }
-        return hijos;    }
+        return hijos;
+    }
 
     @Override
     public String toString() {
