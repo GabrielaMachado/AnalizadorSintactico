@@ -11,7 +11,10 @@ import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posi
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Atributo;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.Cuerpo;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.IF;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.Instancia;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.LlamadoFuncion;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.SentenciaMain;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.While;
 import java.util.ArrayList;
@@ -27,10 +30,17 @@ public class GramaticaMain implements Gramatica {
 //Sentencia a retornar....
         SentenciaMain sentenciaMain = new SentenciaMain();
         IF isIf;
-        While isWhile;
+        //     While isWhile;
+
+        Cuerpo cuerpo;
+        Instancia instancia;
         Atributo atributo;
+        LlamadoFuncion llamadoFuncion;
+        GramaticaCuerpo gramaticaCuerpo = new GramaticaCuerpo();
         GramaticaIF gramaticaIF = new GramaticaIF();
         GramaticaAtributo gramaticaAtributo = new GramaticaAtributo();
+        GramaticaInstancia gramaticaInstancia = new GramaticaInstancia();
+        GramaticaLlamadoFuncion gramaticaLlamadoFuncion = new GramaticaLlamadoFuncion();
         //   GramaticaWhile gramaticaWhile = new GramaticaWhile();
         //  flujoTokens.guardarPosicion();
         int posI = posicion;
@@ -39,7 +49,7 @@ public class GramaticaMain implements Gramatica {
         Lexema lexema = arrayLexemas.get(posA);
 
         //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
+        if ("main".equals(lexema.getToken())) {
             sentenciaMain.setMain(lexema);
             posA++;
             lexema = arrayLexemas.get(posA);
@@ -48,58 +58,125 @@ public class GramaticaMain implements Gramatica {
             if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENKEY) {
                 sentenciaMain.setOpenKey(lexema);
                 posA++;
-
                 posicion = posA;
-                isIf = (IF) gramaticaIF.analizar(arrayLexemas);
 
-                if (isIf != null) {
-                    sentenciaMain.setCondicion(isIf);
-                    posicion++;
-                    posA = posicion;
+                boolean continuar = true;
 
-                    
+                do {
+
+                    isIf = (IF) gramaticaIF.analizar(arrayLexemas);
+
+                    if (isIf != null) {
+                        sentenciaMain.getListaSentencia().add(isIf);
+
+                        posicion++;
+                        posA = posicion;
+                        continue;
+                    }
+
                     atributo = (Atributo) gramaticaAtributo.analizar(arrayLexemas);
 
                     if (atributo != null) {
-                        sentenciaMain.setAtributo(atributo);
+                        sentenciaMain.getListaSentencia().add(atributo);
                         posicion++;
                         posA = posicion;
+                        continue;
 
-//                    posicion = posA;
-//                    isWhile = (While) gramaticaWhile.analizar(arrayLexemas);
+                    }
+
+                    instancia = (Instancia) gramaticaInstancia.analizar(arrayLexemas);
+
+                    if (instancia != null) {
+                        sentenciaMain.getListaSentencia().add(instancia);
+                        posicion++;
+                        posA = posicion;
+                        continue;
+
+                    }
+
+                    llamadoFuncion = (LlamadoFuncion) gramaticaLlamadoFuncion.analizar(arrayLexemas);
+
+                    if (llamadoFuncion != null) {
+                        sentenciaMain.getListaSentencia().add(llamadoFuncion);
+                        posicion++;
+                        posA = posicion;
+                        continue;
+                    }
+
+                    continuar = false;
+                } while (continuar);
+//                cuerpo = (Cuerpo) gramaticaCuerpo.analizar(arrayLexemas);
+//                if (cuerpo != null){
+//                    sentenciaMain.setCuerpo(cuerpo);
+////                    posicion ++;
+//                    posA = posicion;
+
+//                posicion = posA;
+//                isIf = (IF) gramaticaIF.analizar(arrayLexemas);
 //
-//                    if (isWhile != null) {
-//                        sentenciaMain.setIsWhile(isWhile);
+//                if (isIf != null) {
+//                    sentenciaMain.setCondicion(isIf);
+//                    posicion++;
+//                    posA = posicion;
+//
+//                    atributo = (Atributo) gramaticaAtributo.analizar(arrayLexemas);
+//
+//                    if (atributo != null) {
+//                        sentenciaMain.setAtributo(atributo);
 //                        posicion++;
 //                        posA = posicion;
-                        lexema = arrayLexemas.get(posA);
-                        if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY) {
-                            sentenciaMain.setCloseKey(lexema);
-                            posA++;
-                            lexema = arrayLexemas.get(posA);
+//
+//                        instancia = (Instancia) gramaticaInstancia.analizar(arrayLexemas);
+//
+//                        if (instancia != null) {
+//                            sentenciaMain.setInstancia(instancia);
+//                            posicion++;
+//                            posA = posicion;
+//
+//                            llamadoFuncion = (LlamadoFuncion) gramaticaLlamadoFuncion.analizar(arrayLexemas);
+//
+//                            if (llamadoFuncion != null) {
+//                                sentenciaMain.setLlamadoFuncion(llamadoFuncion);
+//                                posicion++;
+//                                posA = posicion;
+//
+                lexema = arrayLexemas.get(posA);
+                if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY) {
+                    sentenciaMain.setCloseKey(lexema);
+                    posA++;
+                    lexema = arrayLexemas.get(posA);
 
-                            if (lexema.getToken().equals(";")) {
-                                posicion = posA;
-                                return sentenciaMain;
-                            } else {
-                                posA = posI;
-                                return null;
-                            }
+                    if (lexema.getToken().equals(";")) {
+                        posicion = posA;
+                        return sentenciaMain;
+                    } else {
+                        posA = posI;
+                        return null;
+                    }
 
 //                        } 
 //                        else {
 //                            posA = posI;
 //                            return null; //
 //                        }
-                        } else {
-                            posA = posI;
-                            return null; //s
-                        }
-                    } else {
-                        posA = posI;
-                        return null; //s
-                    }
+//                                } else {
+//                                    posA = posI;
+//                                    return null; //s
+//                                }
+//                            } else {
+//                                posA = posI;
+//                                return null; //s
+//                            }
+//                        } else {
+//                            posA = posI;
+//                            return null; //s
+//                        }
+//                } else {
+//                    posA = posI;
+//                    return null; //s
+//                }
                 } else {
+
                     posA = posI;
                     return null; //s
                 }
@@ -111,6 +188,7 @@ public class GramaticaMain implements Gramatica {
             }
 
         }
+
         return null;
     }
 

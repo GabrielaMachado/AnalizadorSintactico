@@ -79,6 +79,7 @@ public class LlamadoFuncion extends Sentencia {
 
     @Override
     public List<Sentencia> llenarHijos() {
+        
         hijos = new ArrayList<>();
         hijos.add(new SentenciaLexema(ident));
         hijos.add(new SentenciaLexema(ident2));

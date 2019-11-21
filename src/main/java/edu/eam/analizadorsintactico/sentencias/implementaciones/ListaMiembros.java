@@ -46,7 +46,7 @@ public class ListaMiembros<T extends Sentencia> extends Sentencia{
 
     @Override
     public String toString() {
-        return "Lista de sentencias";
+         return "Lista de "+(!hijos.isEmpty()?hijos.get(0).getClass().getSimpleName():"");
     }    
 
     @Override

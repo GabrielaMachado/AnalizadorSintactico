@@ -47,11 +47,12 @@ public class IF extends Sentencia{
             hijos.add(new SentenciaLexema(ident1));
         }
 
-         
          for (int i = 0; i < hijos.size(); i++) {
              System.out.println("hijo "+i+ "  "+ hijos.get(i));
         }
+         
         return (ArrayList<Sentencia>) hijos;
+        
     }
 
     @Override

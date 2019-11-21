@@ -47,12 +47,13 @@ public class GramaticaLlamadoFuncion implements Gramatica {
                     posA++;
                     lexema = arrayLexemas.get(posA);
 
-                    if (lexema.getTipo() == TipoLexemaEnum.QUOTES/*coma*/) {
+                    if (lexema.getToken().equals(",")) {
                         llamadoFuncion.setComa(lexema);
                         posA++;
                         lexema = arrayLexemas.get(posA);
 
                         if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEP) {
+                            llamadoFuncion.setCloseP(lexema);
                             //derivar...
                             posicion = posA;
                             return llamadoFuncion;
