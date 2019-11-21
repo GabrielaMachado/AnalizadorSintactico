@@ -7,6 +7,7 @@ package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -102,12 +103,15 @@ public class Return extends Sentencia{
     
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
-//        if (inicializacion != null) {
-//            hijos.add(new SentenciaToken(inicializacion));
-//        }
+        hijos = new ArrayList<>();
+        hijos.add(new SentenciaLexema(mensaje));
+        hijos.add(new SentenciaLexema(literalBooleana));
+        hijos.add(new SentenciaLexema(literalBooleana));
+        hijos.add(new SentenciaLexema(literalBooleana));
+        hijos.add(new SentenciaLexema(literalBooleana));
+        if (inicializacion != null) {
+            hijos.add(new SentenciaToken(inicializacion));
+        }
         return hijos;    }
 
     @Override
