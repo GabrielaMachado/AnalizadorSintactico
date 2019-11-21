@@ -126,6 +126,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Main");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane3.setViewportView(jTree1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,7 +188,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jTable1.setModel(llenarTabla());
         AnalizadorSintactico.verificarGramaticas(lista);
         SentenciaMain main = AnalizadorSintactico.getMain();
-        main.llenarHijos();
+        if (main!= null){
+            main.llenarHijos();
+        }
+        
         jTree1.setModel(new DefaultTreeModel(main));
        
     }//GEN-LAST:event_btnAnalizarActionPerformed

@@ -19,7 +19,7 @@ public class Atributo extends Sentencia {
     /**
      * Modificador de acceso del metodo.
      */
-    private Lexema tipoDato;
+    private TipoDato tipoDato;
     /**
      * Nombre del metodo
      */
@@ -34,7 +34,7 @@ public class Atributo extends Sentencia {
     public Atributo() {
     }
 
-    public Atributo(Lexema tipoDato, Lexema ident, Lexema equals, Lexema inicializacion) {
+    public Atributo(TipoDato tipoDato, Lexema ident, Lexema equals, Lexema inicializacion) {
         this.tipoDato = tipoDato;
         this.ident = ident;
         this.equals = equals;
@@ -44,7 +44,9 @@ public class Atributo extends Sentencia {
     @Override
     public List<Sentencia> llenarHijos() {
         hijos = new ArrayList<>();
-        hijos.add(new SentenciaLexema(tipoDato));
+        if (tipoDato != null) {
+            hijos.add(tipoDato);
+        }
         hijos.add(new SentenciaLexema(ident));
         if (inicializacion != null) {
             hijos.add(new SentenciaLexema(inicializacion));
@@ -52,11 +54,11 @@ public class Atributo extends Sentencia {
         return hijos;
     }
 
-    public Lexema getTipoDato() {
+    public TipoDato getTipoDato() {
         return tipoDato;
     }
 
-    public void setTipoDato(Lexema tipoDato) {
+    public void setTipoDato(TipoDato tipoDato) {
         this.tipoDato = tipoDato;
     }
 
@@ -75,7 +77,7 @@ public class Atributo extends Sentencia {
     public void setEquals(Lexema equals) {
         this.ident = equals;
     }
-    
+
     public Lexema getInicializacion() {
         return inicializacion;
     }
@@ -86,7 +88,7 @@ public class Atributo extends Sentencia {
 
     @Override
     public String toString() {
-        return "Atributo:" + tipoDato.getToken() + " " + ident.getToken();
+        return "Atributo:" + tipoDato.getTipoDato() + " " + ident.getToken();
     }
 
     @Override

@@ -55,9 +55,9 @@ public class GramaticaTryCatch implements Gramatica{
 
                         ListaCatch<Catch> catchs = new ListaCatch<>();
                         GramaticaCatch gramaCatch = new GramaticaCatch();
-                        GramaticaListaCatch<Catch> gramaCatchs = new GramaticaListaCatch();
-                        catchs = gramaCatchs.analizar(gramaCatch,tryCatch,flujoTokens, TipoLexemaEnum.COMA);
-                        tryCatch.setListaCatch(catchs);
+//                        GramaticaListaCatch<Catch> gramaCatchs = new GramaticaListaCatch();
+//                        catchs = gramaCatchs.analizar(gramaCatch,tryCatch,flujoTokens, TipoLexemaEnum.COMA);
+//                        tryCatch.setListaCatch(catchs);
                         lexema=arrayLexemas.get(posA);
                         if (lexema.getTipo() == TipoLexemaEnum.EXP_CATCH) {
                             tryCatch.setIsCatch(lexema);

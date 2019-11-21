@@ -43,6 +43,7 @@ public class Automata {
                         posActual = posIn;
                         if (ch[posIn + 1].toString().equals(" ")) {
                             posIn++;
+                            
                             return lex = new Lexema(pos, tipo, lexema);
                         } else {
                             return null;

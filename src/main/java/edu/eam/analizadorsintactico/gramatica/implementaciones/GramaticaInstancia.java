@@ -7,6 +7,7 @@ package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorlexicos.TipoLexemaEnum;
+import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Instancia;
@@ -23,8 +24,8 @@ public class GramaticaInstancia implements Gramatica {
 //Sentencia a retornar....
         Instancia instancia = new Instancia();
         //  flujoTokens.guardarPosicion();
-        int posI = posicionInicial;
-        int posA = posicionInicial;
+        int posI = posicion;
+        int posA = posicion;
         //primer token de la gramatica.
         Lexema lexema = arrayLexemas.get(posA);
 
@@ -40,13 +41,13 @@ public class GramaticaInstancia implements Gramatica {
                 posA++;
                 lexema = arrayLexemas.get(posA);
 
-                if (lexema.getToken().equals("=")) {
-                    instancia.setIdent1(lexema);
+                if (lexema.getTipo() == TipoLexemaEnum.ASIGNACION) {
+                    instancia.setEquals(lexema);
                     posA++;
                     lexema = arrayLexemas.get(posA);
 
-                    if (lexema.getToken().equals("new")) {
-                        instancia.setIdent1(lexema);
+                    if (lexema.getTipo() == TipoLexemaEnum.ED_NEW) {
+                        instancia.setIsNew(lexema);
                         posA++;
                         lexema = arrayLexemas.get(posA);
 
@@ -56,17 +57,16 @@ public class GramaticaInstancia implements Gramatica {
                             lexema = arrayLexemas.get(posA);
 
                             if (lexema.getToken().equals("(")) {
-                                instancia.setIdent1(lexema);
                                 posA++;
                                 lexema = arrayLexemas.get(posA);
 
                                 if (lexema.getToken().equals(")")) {
-                                    instancia.setIdent1(lexema);
                                     posA++;
                                     lexema = arrayLexemas.get(posA);
                                     
                                     if (lexema.getToken().equals(";")) {
                                         //derivar...
+                                        posicion = posA;
                                         return instancia;
                                     } else {
                                         //si no es identificador, no es atributo, se retorna el flujo a 

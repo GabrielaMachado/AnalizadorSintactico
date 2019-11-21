@@ -7,6 +7,7 @@ package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,10 @@ public class Instancia extends Sentencia {
      * Nombre del metodo
      */
     private Lexema ident2;
+    
+    private Lexema equals;
+    
+    private Lexema isNew;
 
     /**
      * Tipo de retorno.
@@ -32,12 +37,31 @@ public class Instancia extends Sentencia {
     public Instancia() {
     }
 
-    public Instancia(Lexema ident1, Lexema ident2, Lexema ident3) {
+    public Instancia(Lexema ident1, Lexema ident2, Lexema ident3, Lexema equals, Lexema isNew) {
         this.ident1 = ident1;
         this.ident2 = ident2;
         this.ident3 = ident3;
+        this.equals = equals;
+        this.isNew = isNew;
     }
 
+    public Lexema getEquals() {
+        return equals;
+    }
+
+    public void setEquals(Lexema equals) {
+        this.equals = equals;
+    }
+
+    public Lexema getIsNew() {
+        return isNew;
+    }
+
+    public void setIsNew(Lexema isNew) {
+        this.isNew = isNew;
+    }
+
+    
     public Lexema getIdent1() {
         return ident1;
     }
@@ -64,12 +88,12 @@ public class Instancia extends Sentencia {
 
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
-//        if (inicializacion != null) {
-//            hijos.add(new SentenciaToken(inicializacion));
-//        }
+        hijos = new ArrayList<>();
+        hijos.add(new SentenciaLexema(ident1));
+        hijos.add(new SentenciaLexema(ident2));
+        hijos.add(new SentenciaLexema(equals));
+        hijos.add(new SentenciaLexema(isNew));
+        hijos.add(new SentenciaLexema(ident3));
         return hijos;    }
 
     @Override

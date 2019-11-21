@@ -15,28 +15,58 @@ import java.util.List;
  * @author dani0
  */
 public class SentenciaMain extends Sentencia {
+    
+    private Lista<Sentencia> listaSentencia;
 
     private Lexema main;
 
     private Lexema openKey;
 
     private IF condicion;
-    
+
     private While isWhile;
-    
+
     private Atributo atributo;
+
+    private Instancia instancia;
+
+    private LlamadoFuncion llamadoFuncion;
 
     private Lexema closeKey;
 
     public SentenciaMain() {
+        listaSentencia = new Lista<>();
     }
 
-        public SentenciaMain(Lexema main, Lexema openKey, IF condicion, Lexema closeKey, Atributo atributo) {
-        this.main = main;
-        this.openKey = openKey;
-        this.condicion = condicion;
-        this.closeKey = closeKey;
-        this.atributo = atributo;
+//    public SentenciaMain(Cuerpo cuerpo, Lexema main, Lexema openKey, IF condicion, Lexema closeKey, Atributo atributo, Instancia instancia,
+//            LlamadoFuncion llamadoFuncion) {
+//        this.main = main;
+//        this.openKey = openKey;
+//        this.condicion = condicion;
+//        this.closeKey = closeKey;
+//        this.atributo = atributo;
+//        this.instancia = instancia;
+//        this.llamadoFuncion = llamadoFuncion;
+//        this.cuerpo = cuerpo;
+//    }
+
+   
+    
+    
+    public LlamadoFuncion getLlamadoFuncion() {
+        return llamadoFuncion;
+    }
+
+    public void setLlamadoFuncion(LlamadoFuncion llamadoFuncion) {
+        this.llamadoFuncion = llamadoFuncion;
+    }
+
+    public Instancia getInstancia() {
+        return instancia;
+    }
+
+    public void setInstancia(Instancia instancia) {
+        this.instancia = instancia;
     }
 
     public Lexema getMain() {
@@ -86,35 +116,53 @@ public class SentenciaMain extends Sentencia {
     public void setAtributo(Atributo atributo) {
         this.atributo = atributo;
     }
-    
-    
 
+    public Lista<Sentencia> getListaSentencia() {
+        return listaSentencia;
+    }
+
+    public void setListaSentencia(Lista<Sentencia> listaSentencia) {
+        this.listaSentencia = listaSentencia;
+    }
+
+    
+    
     @Override
     public List<Sentencia> llenarHijos() {
         hijos = new ArrayList<>();
 
-         if (main != null) {
+        if(listaSentencia.getSentencias() != null){
+            hijos.add(listaSentencia);
+        }
+        
+        if (main != null) {
             hijos.add(new SentenciaLexema(main));
         }
-         if (condicion != null) {
+        if (condicion != null) {
             hijos.add(condicion);
         }
-         
-         if (atributo != null) {
+
+        if (atributo != null) {
             hijos.add(atributo);
         }
 
-         
-         for (int i = 0; i < hijos.size(); i++) {
-             System.out.println("hijo "+i+ "  "+ hijos.get(i));
+        if (instancia != null) {
+            hijos.add(instancia);
         }
-        return (ArrayList<Sentencia>) hijos;
+
+        if (llamadoFuncion != null) {
+            hijos.add(llamadoFuncion);
+        }
+
+        for (int i = 0; i < hijos.size(); i++) {
+            System.out.println("hijo " + i + "  " + hijos.get(i));
+        }
+        return hijos;
     }
 
     @Override
     public String toString() {
-        return "Main: " + main.getToken() + " " + openKey.getToken() + " " + condicion.getIdent1()
-                + " " + closeKey.getToken();
+        return "Main:" + main.getToken();
     }
 
     @Override

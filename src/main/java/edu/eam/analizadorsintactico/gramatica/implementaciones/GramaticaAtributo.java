@@ -11,6 +11,7 @@ import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posi
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Atributo;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.TipoDato;
 import java.util.ArrayList;
 
 /**
@@ -23,22 +24,20 @@ public class GramaticaAtributo implements Gramatica {
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 //Sentencia a retornar....
         Atributo atributo = new Atributo();
+
+        TipoDato tipoDato;
+        Gramatica gramaticaTipoDato = new GramaticaTipoDato();
+
         //  flujoTokens.guardarPosicion();
         int posI = posicion;
         int posA = posicion;
         //primer token de la gramatica.
         Lexema lexema = arrayLexemas.get(posA);
 
+        tipoDato = (TipoDato) gramaticaTipoDato.analizar(arrayLexemas);
         //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.TD_BOOLEAN ||
-                lexema.getTipo() == TipoLexemaEnum.TD_CHAR ||
-                lexema.getTipo() == TipoLexemaEnum.TD_COLOR ||
-                lexema.getTipo() == TipoLexemaEnum.TD_DOUBLE ||
-                lexema.getTipo() == TipoLexemaEnum.TD_FIGURE ||
-                lexema.getTipo() == TipoLexemaEnum.TD_INTEGER ||
-                lexema.getTipo() == TipoLexemaEnum.TD_STRING ||
-                lexema.getTipo() == TipoLexemaEnum.TD_STYLE) {
-            atributo.setTipoDato(lexema);
+        if (tipoDato != null) {
+            atributo.setTipoDato(tipoDato);
             posA++;
             lexema = arrayLexemas.get(posA);
 

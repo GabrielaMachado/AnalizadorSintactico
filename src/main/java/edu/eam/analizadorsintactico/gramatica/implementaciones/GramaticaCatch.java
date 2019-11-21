@@ -72,11 +72,11 @@ public class GramaticaCatch implements Gramatica {
 //                                    lexema = arrayLexemas.get(posA);
 //                                }
 
-                                if (lexema.getTipo() == TipoLexemaEnum.cuerpo) {
-                                    isCatch.setListaMiembros(lexema);
-                                    posA++;
-                                    lexema = arrayLexemas.get(posA);
-                                }
+//                                if (lexema.getTipo() == TipoLexemaEnum.cuerpo) {
+//                                    isCatch.setListaMiembros(lexema);
+//                                    posA++;
+//                                    lexema = arrayLexemas.get(posA);
+//                                }
 
                                 if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY) {
                                     return isCatch;

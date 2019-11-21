@@ -6,6 +6,7 @@
 package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
+import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
 import static edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica.posicionInicial;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Atributo;
@@ -21,6 +22,7 @@ import edu.eam.analizadorsintactico.sentencias.implementaciones.SwitchCase;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.TryCatch;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.While;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -28,7 +30,7 @@ import java.util.ArrayList;
  */
 public class GramaticaListaMiembro {
 
-    public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
+    public ListaMiembros<Sentencia> analizar(ArrayList<Lexema> arrayLexemas) {
 
         GramaticaIF gramaticaIf = new GramaticaIF();
         GramaticaAtributo gramaticaAtributo = new GramaticaAtributo();
@@ -54,19 +56,20 @@ public class GramaticaListaMiembro {
 
         ListaMiembros<Sentencia> listaMiembros = new ListaMiembros<>();
         //  flujoTokens.guardarPosicion();
-        int posI = posicionInicial;
-        int posA = posicionInicial;
+        int posI = posicion;
+        int posA = posicion;
         //primer token de la gramatica.
-        Lexema lexema = arrayLexemas.get(posA);
+        Lexema lexema = arrayLexemas.get(posA - 1);
 
         do {
-//            if (flujoLexema.getLexema().getTipoLexema() == TipoLexemaEnum.COMILLA_DOBLE || flujoLexema.getLexema().getTipoLexema() == TipoLexemaEnum.VLR_RETORNO) {
-//                break;
-////            }
+            if (arrayLexemas.get(posA).getToken().equals("}")) {
+                break;
+            }
             isIf = (IF) gramaticaIf.analizar(arrayLexemas);
             if (isIf != null) {
                 listaMiembros.add(isIf);
-                return listaMiembros;
+                posicion++;
+                posA = posicion;
             } else {
                 posA = posI;
                 return null;
@@ -281,6 +284,7 @@ public class GramaticaListaMiembro {
 //            
 //            break;
         } while (true);
+        return listaMiembros;
 
     }
 
