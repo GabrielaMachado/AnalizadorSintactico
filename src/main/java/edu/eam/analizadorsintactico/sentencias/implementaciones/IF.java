@@ -14,55 +14,76 @@ import java.util.List;
  *
  * @author dani0
  */
-public class IF extends Sentencia{
+public class IF extends Sentencia {
 
-  /**
+    /**
      * Modificador de acceso del metodo.
      */
-    private Lexema ident1;
-   
+    private Lexema IF;
+    private Condicion condicion;
+    private Cuerpo cuerpo;
 
     public IF() {
     }
 
-    public IF(Lexema ident1) {
-        this.ident1 = ident1;
-      
+    public IF(Lexema IF, Condicion condicion, Cuerpo cuerpo) {
+        this.IF = IF;
+        this.condicion = condicion;
+        this.cuerpo = cuerpo;
     }
-
-    public Lexema getIdent1() {
-        return ident1;
-    }
-
-    public void setIdent1(Lexema ident1) {
-        this.ident1 = ident1;
-    }
-
 
     @Override
     public List<Sentencia> llenarHijos() {
         hijos = new ArrayList<>();
 
-         if (ident1 != null) {
-            hijos.add(new SentenciaLexema(ident1));
+        if (IF != null) {
+            hijos.add(new SentenciaLexema(IF));
         }
+        if (condicion != null) {
+            hijos.add(condicion);
+        }
+        if (cuerpo != null) {
+            hijos.add(cuerpo);
+        }
+        for (int i = 0; i < hijos.size(); i++) {
+            System.out.println("hijo " + i + "  " + hijos.get(i));
+        }
+        return hijos;
 
-         for (int i = 0; i < hijos.size(); i++) {
-             System.out.println("hijo "+i+ "  "+ hijos.get(i));
-        }
-         
-        return (ArrayList<Sentencia>) hijos;
-        
+    }
+
+    public Lexema getIF() {
+        return IF;
+    }
+
+    public void setIF(Lexema IF) {
+        this.IF = IF;
+    }
+
+    public Condicion getCondicion() {
+        return condicion;
+    }
+
+    public void setCondicion(Condicion condicion) {
+        this.condicion = condicion;
+    }
+
+    public Cuerpo getCuerpo() {
+        return cuerpo;
+    }
+
+    public void setCuerpo(Cuerpo cuerpo) {
+        this.cuerpo = cuerpo;
     }
 
     @Override
     public String toString() {
-        return "Instancia:" + ident1.getToken();
+        return "If :" + IF.getToken();
     }
 
     @Override
     public String parse() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

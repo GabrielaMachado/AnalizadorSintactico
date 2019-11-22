@@ -14,9 +14,8 @@ import java.util.List;
  * @author dani0
  */
 public class FOR extends Sentencia{
-    private Lexema isFor;
-    private Lexema openP;    
-    private Lexema tipoDatoNumerico;    
+    private Lexema FOR;    
+    private TipoDatoNumerico tipoDatoNumerico;    
     private Lexema ident1;    
     private Lexema equals;    
     private Lexema numero1;    
@@ -24,7 +23,7 @@ public class FOR extends Sentencia{
     private Lexema semicolon;
     private Lexema numero2;
     private Lexema ident3;
-    private Lexema operadorRelacional;
+    private OpLogico operadorLogico;
     private Lexema numero3;
     private Lexema ident4;
     private Lexema semicolon2;
@@ -43,7 +42,7 @@ public class FOR extends Sentencia{
     }
 
     public FOR(Lexema isFor, Lexema openP, Lexema tipoDatoNumerico, Lexema ident1, Lexema equals, Lexema numero1, Lexema ident2, Lexema semicolon, Lexema numero2, Lexema ident3, Lexema operadorRelacional, Lexema numero3, Lexema ident4, Lexema semicolon2, Lexema ident5, Lexema plusPlus, Lexema munisMinus, Lexema operadorAritmetico, Lexema numero4, Lexema closeP, Lexema openKey, Lexema cuerpo, Lexema closeKey) {
-        this.isFor = isFor;
+        this.FOR = isFor;
         this.openP = openP;
         this.tipoDatoNumerico = tipoDatoNumerico;
         this.ident1 = ident1;
@@ -69,11 +68,11 @@ public class FOR extends Sentencia{
     }
 
     public Lexema getIsFor() {
-        return isFor;
+        return FOR;
     }
 
     public void setIsFor(Lexema isFor) {
-        this.isFor = isFor;
+        this.FOR = isFor;
     }
 
     public Lexema getOpenP() {
@@ -264,7 +263,7 @@ public class FOR extends Sentencia{
 
     @Override
     public String toString() {
-        return "for:" + isFor.getToken() + " " + openP.getToken() + " " + tipoDatoNumerico.getToken()
+        return "for:" + FOR.getToken() + " " + openP.getToken() + " " + tipoDatoNumerico.getToken()
                 + " " + ident1.getToken() + " " + equals.getToken() + " " + numero1.getToken()
                 + " " + ident2.getToken() + " " + semicolon.getToken()+ " " + numero2.getToken()+ " " + ident3.getToken()
                 + " " + operadorRelacional.getToken()+ " " + numero3.getToken()+ " " + ident4.getToken()+ " " + semicolon2.getToken()
