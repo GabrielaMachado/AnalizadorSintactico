@@ -7,10 +7,13 @@ package edu.eam.analizadorsintactico.gramatica.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorlexicos.TipoLexemaEnum;
+import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import static edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica.posicionInicial;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.Expresion;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.ExpresionLogica;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.OpLogico;
 import java.util.ArrayList;
 
 /**
@@ -22,51 +25,42 @@ public class GramaticaExpresionLogica implements Gramatica {
     @Override
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 //Sentencia a retornar....
+        OpLogico operadorLogico;
+        Expresion expresion;
+        GramaticaExpresion gramaticaExpresion = new GramaticaExpresion();
+        GramaticaOpLogico gramaticaOpLogico = new GramaticaOpLogico();
         ExpresionLogica expresionLogica = new ExpresionLogica();
         //  flujoTokens.guardarPosicion();
-        int posI = posicionInicial;
-        int posA = posicionInicial;
+        int posI = posicion;
+        int posA = posicion;
         //primer token de la gramatica.
         Lexema lexema = arrayLexemas.get(posA);
+        boolean continuar = true;
+        do {
 
-        //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.IDENT/*numero1*/) {
-            expresionLogica.setNumero1(lexema);
-            posA++;
-            lexema = arrayLexemas.get(posA);
+            expresion = (Expresion) gramaticaExpresion.analizar(arrayLexemas);
 
-            //nombre del atributo....
-            if (lexema.getTipo() == TipoLexemaEnum.OPERADORARITMETICO) {
-                expresionLogica.setOperadoresAritmeticos(lexema);
-                posA++;
-                lexema = arrayLexemas.get(posA);
+            if (expresion != null) {
+                expresionLogica.getExpresiones().add(expresion);
+                posicion++;
+                posA = posicion;
 
-                if (lexema.getTipo() == TipoLexemaEnum.IDENT/*numero2*/) {
-                    expresionLogica.setNumero2(lexema);
-                    posA++;
-                    lexema = arrayLexemas.get(posA);
+                operadorLogico = (OpLogico) gramaticaOpLogico.analizar(arrayLexemas);
+                if (operadorLogico != null) {
+                    expresionLogica.getOperadores().add(operadorLogico);
+                    posicion++;
+                    posA = posicion;
 
-                    if (lexema.getToken().equals(";")) {
-                        //derivar...
-                        return expresionLogica;
-                    } else {
-                        //si no es identificador, no es atributo, se retorna el flujo a 
-                        //la posicion inicial
-                        posA = posI;
-                        return null; //se retorna null para que se pruebe con otra regal..
+                    if (lexema == null) {
+                        System.out.println("rayos");
                     }
-                } else {
-                    posA = posI;
-                    return null; //
+                    continue;
                 }
-            } else {
-                //si no es identificador, no es atributo, se retorna el flujo a 
-                //la posicion inicial
-                posA = posI;
-                return null; //se retorna null para que se pruebe con otra regal..
             }
+            continuar = false;
+        } while (continuar);
+        //tipo de dato.....
 
-        }
         return null;
     }
 

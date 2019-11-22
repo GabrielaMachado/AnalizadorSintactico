@@ -12,6 +12,7 @@ import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Atributo;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Cuerpo;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.ExpresionLogica;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.IF;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Instancia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.LlamadoFuncion;
@@ -35,7 +36,9 @@ public class GramaticaMain implements Gramatica {
         Cuerpo cuerpo;
         Instancia instancia;
         Atributo atributo;
+        ExpresionLogica expresionLogica;
         LlamadoFuncion llamadoFuncion;
+        GramaticaExpresionLogica gramaticaExpresionLogica = new GramaticaExpresionLogica();
         GramaticaCuerpo gramaticaCuerpo = new GramaticaCuerpo();
         GramaticaIF gramaticaIF = new GramaticaIF();
         GramaticaAtributo gramaticaAtributo = new GramaticaAtributo();
@@ -68,6 +71,16 @@ public class GramaticaMain implements Gramatica {
 
                     if (isIf != null) {
                         sentenciaMain.getListaSentencia().add(isIf);
+
+                        posicion++;
+                        posA = posicion;
+                        continue;
+                    }
+
+                    expresionLogica = (ExpresionLogica) gramaticaExpresionLogica.analizar(arrayLexemas);
+
+                    if (expresionLogica != null) {
+                        sentenciaMain.getListaSentencia().add(expresionLogica);
 
                         posicion++;
                         posA = posicion;
