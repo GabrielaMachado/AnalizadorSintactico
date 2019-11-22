@@ -10,30 +10,32 @@ import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
-import edu.eam.analizadorsintactico.sentencias.implementaciones.TipoDatoNumerico;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.OpAritmetico;
 import java.util.ArrayList;
 
 /**
  *
  * @author dani0
  */
-public class GramaticaTipoDatoNumerico implements Gramatica{
+public class GramaticaOpAritmetico implements Gramatica{
     
     @Override
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 //Sentencia a retornar....
-        TipoDatoNumerico tipoDatoNumerico = new TipoDatoNumerico();
+        OpAritmetico opAritmetico = new OpAritmetico();
         int posI = posicion;
         int posA = posicion;
         //primer token de la gramatica.
         Lexema lexema = arrayLexemas.get(posA);
 
         //tipo de dato.....
-        if (lexema.getTipo() == TipoLexemaEnum.TD_INTEGER || lexema.getTipo() == TipoLexemaEnum.TD_DOUBLE) {
-            tipoDatoNumerico.setTipoDatoNumerico(lexema);
+        if (lexema.getTipo() == TipoLexemaEnum.OP_ART_PLUS || lexema.getTipo() == TipoLexemaEnum.OP_ART_MINUS
+                || lexema.getTipo() == TipoLexemaEnum.OP_ART_TIME || lexema.getTipo() == TipoLexemaEnum.OP_ART_DIVIDED
+                || lexema.getTipo() == TipoLexemaEnum.OPERADORARITMETICO) {
+            opAritmetico.setOpAritmetico(lexema);
             posA++;
             posicion = posA;
-            return tipoDatoNumerico;
+            return opAritmetico;
         } else {
             posA = posI;
             return null;
