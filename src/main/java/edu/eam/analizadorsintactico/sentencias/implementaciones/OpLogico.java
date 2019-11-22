@@ -14,37 +14,38 @@ import java.util.List;
  *
  * @author dani0
  */
-public class TipoDatoNumerico extends Sentencia{
+public class OpLogico extends Sentencia{
      /**
      * Modificador de acceso del metodo.
      */
-    private Lexema tipoDatoNumerico;
+    private Lexema opLogico;
 
-    public TipoDatoNumerico() {
+    public OpLogico() {
     }
 
-    public TipoDatoNumerico(Lexema tipoDatoNumerico) {
-        this.tipoDatoNumerico = tipoDatoNumerico;
+    public OpLogico(Lexema opLogico) {
+        this.opLogico = opLogico;
     }
 
     @Override
     public List<Sentencia> llenarHijos() {
         hijos = new ArrayList<>();
-        hijos.add(new SentenciaLexema(tipoDatoNumerico));
+        hijos.add(new SentenciaLexema(opLogico));
         return hijos;
     }
 
-    public Lexema getTipoDatoNumerico() {
-        return tipoDatoNumerico;
+    public Lexema getOpLogico() {
+        return opLogico;
     }
 
-    public void setTipoDatoNumerico(Lexema tipoDatoNumerico) {
-        this.tipoDatoNumerico = tipoDatoNumerico;
+    public void setOpLogico(Lexema opLogico) {
+        this.opLogico = opLogico;
     }
+
 
     @Override
     public String toString() {
-        return "Atributo:" + tipoDatoNumerico.getToken();
+        return "Atributo:" + opLogico.getToken();
     }
 
     @Override
