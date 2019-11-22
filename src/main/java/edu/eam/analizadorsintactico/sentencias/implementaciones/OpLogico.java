@@ -23,8 +23,8 @@ public class OpLogico extends Sentencia{
     public OpLogico() {
     }
 
-    public OpLogico(Lexema opRelacional) {
-        this.opLogico = opRelacional;
+    public OpLogico(Lexema opLogico) {
+        this.opLogico = opLogico;
     }
 
     @Override
@@ -34,12 +34,12 @@ public class OpLogico extends Sentencia{
         return hijos;
     }
 
-    public Lexema getOpRelacional() {
+    public Lexema getOpLogico() {
         return opLogico;
     }
 
-    public void setOpRelacional(Lexema opRelacional) {
-        this.opLogico = opRelacional;
+    public void setOpLogico(Lexema opLogico) {
+        this.opLogico = opLogico;
     }
 
 
