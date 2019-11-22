@@ -5,46 +5,45 @@
  */
 package edu.eam.analizadorsintactico.excepciones;
 
+import edu.eam.analizadorlexicos.Lexema;
+
 /**
- *Excepcion que se lanza cuando hay un error sintactico.
+ * Excepcion que se lanza cuando hay un error sintactico.
+ *
  * @author dani0
  */
-public class SintacticException extends RuntimeException{
-    
-    /**
-     * Token actual del analisis.
-     */
-    //private SimboloLexico antes;
+public class SintacticException extends RuntimeException {
+
+    private Lexema antes;
     /**
      * Lo que se esperaba
      */
-    //private TipoLexemaEnum esperado;
-    
+    private String esperado;
 
-//    public SintacticException(SimboloLexico antes, TipoLexemaEnum esperado) {
-//        
-//        super("Error en "+antes.getFila()+"-"+antes.getColumna()+
-//                ": Simbolo no esperado: "+antes.getTipo().name()+". se esperaba "+esperado
-//        );
-//        
-//        this.antes = antes;
-//        this.esperado = esperado;
-//    }
-//
-//    public SimboloLexico getAntes() {
-//        return antes;
-//    }
-//
-//    public void setAntes(SimboloLexico antes) {
-//        this.antes = antes;
-//    }
-//
-//    public TipoLexemaEnum getEsperado() {
-//        return esperado;
-//    }
-//
-//    public void setEsperado(TipoLexemaEnum esperado) {
-//        this.esperado = esperado;
-//    }
-     
+    public SintacticException(Lexema antes, String esperado) {
+
+        super("Error en " + antes.getCont()
+                + ": Simbolo no esperado: " + antes.getToken() + ". se esperaba " + esperado
+        );
+
+        this.antes = antes;
+        this.esperado = esperado;
+    }
+
+    public Lexema getAntes() {
+        return antes;
+    }
+
+    public void setAntes(Lexema antes) {
+        this.antes = antes;
+    }
+
+    public String getEsperado() {
+        return esperado;
+    }
+
+    public void setEsperado(String esperado) {
+        this.esperado = esperado;
+    }
+
 }

@@ -8,6 +8,7 @@ package edu.eam.analizadorsintactico.gramatica.implementaciones;
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
+import edu.eam.analizadorsintactico.excepciones.SintacticException;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Atributo;
@@ -62,9 +63,11 @@ public class GramaticaAtributo implements Gramatica {
                             posicion = posA;
                             return atributo;
                         } else {
+
                             //si no es identificador, no es atributo, se retorna el flujo a 
                             //la posicion inicial
                             posA = posI;
+
                             return null; //se retorna null para que se pruebe con otra regal..
                         }
                     } else {

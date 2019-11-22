@@ -7,36 +7,47 @@ package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author dani0
  */
-public class Expresion extends Sentencia{
-    
-    private Lexema expresionLogica;
+public class Expresion extends Sentencia {
+
+    private ExpresionAritmetica expresionAritmetica;
+
+    private ExpresionLogica expresionLogica;
 
     private Lexema ident;
-    
+
     private Lexema llamadoFuncion;
-    
-    
+
     public Expresion() {
     }
 
-    public Expresion(Lexema expresionLogica, Lexema ident, Lexema llamadoFuncion) {
-        this.expresionLogica = expresionLogica;
+    public Expresion(ExpresionAritmetica expresionAritmetica, ExpresionLogica expresionLogica, Lexema ident, Lexema llamadoFuncion) {
+        this.expresionAritmetica = expresionAritmetica;
         this.ident = ident;
         this.llamadoFuncion = llamadoFuncion;
+        this.expresionLogica = expresionLogica;
     }
 
-    public Lexema getExpresionLogica() {
+    public ExpresionLogica getExpresionLogica() {
         return expresionLogica;
     }
 
-    public void setExpresionLogica(Lexema expresionLogica) {
+    public void setExpresionLogica(ExpresionLogica expresionLogica) {
         this.expresionLogica = expresionLogica;
+    }
+
+    public ExpresionAritmetica getExpresionAritmetica() {
+        return expresionAritmetica;
+    }
+
+    public void setExpresionAritmetica(ExpresionAritmetica expresionAritmetica) {
+        this.expresionAritmetica = expresionAritmetica;
     }
 
     public Lexema getIdent() {
@@ -57,17 +68,27 @@ public class Expresion extends Sentencia{
 
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
-//        if (inicializacion != null) {
-//            hijos.add(new SentenciaToken(inicializacion));
-//        }
-        return hijos;    }
+        hijos = new ArrayList<>();
+
+        if (expresionAritmetica != null) {
+
+            hijos.add(expresionAritmetica);
+        }
+        if (expresionLogica != null) {
+
+            hijos.add(expresionLogica);
+        }
+        if (ident != null) {
+
+            hijos.add(new SentenciaLexema(ident));
+        }
+
+        return hijos;
+    }
 
     @Override
     public String toString() {
-        return "Expresion logica:" + expresionLogica.getToken() + " " + ident.getToken() + " " + llamadoFuncion.getToken();
+        return "Expresion logica:";
     }
 
     @Override
