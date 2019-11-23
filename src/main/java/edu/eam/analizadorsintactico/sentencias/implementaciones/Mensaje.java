@@ -7,43 +7,24 @@ package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author dani0
  */
-public class Mensaje extends Sentencia{
-    
-    private Lexema mensaje;
+public class Mensaje extends Sentencia {
 
-    private Lexema equals;
-    
-    private Lexema openP;
-    
-    private Lexema comillas;
-    
-    private Lexema contenidoMensaje;
-    
-    private Lexema operadoresAritmeticos;
-    
-    private Lexema closeP;
-    
-    private Lexema semicolon;
+    private Lexema mensaje;
+    private ContenidoMensaje contenidoMensaje;
 
     public Mensaje() {
     }
 
-    public Mensaje(Lexema mensaje, Lexema equals, Lexema openP, Lexema comillas, Lexema contenidoMensaje,
-            Lexema operadoresAritmeticos, Lexema closeP, Lexema semicolon) {
+    public Mensaje(Lexema mensaje, ContenidoMensaje contenidoMensaje) {
         this.mensaje = mensaje;
-        this.equals = equals;
-        this.openP = openP;
-        this.comillas = comillas;
         this.contenidoMensaje = contenidoMensaje;
-        this.operadoresAritmeticos = operadoresAritmeticos;
-        this.closeP = closeP;
-        this.semicolon = semicolon;
     }
 
     public Lexema getMensaje() {
@@ -54,77 +35,32 @@ public class Mensaje extends Sentencia{
         this.mensaje = mensaje;
     }
 
-    public Lexema getEquals() {
-        return equals;
-    }
-
-    public void setEquals(Lexema equals) {
-        this.equals = equals;
-    }
-
-    public Lexema getOpenP() {
-        return openP;
-    }
-
-    public void setOpenP(Lexema openP) {
-        this.openP = openP;
-    }
-
-    public Lexema getComillas() {
-        return comillas;
-    }
-
-    public void setComillas(Lexema comillas) {
-        this.comillas = comillas;
-    }
-
-    public Lexema getContenidoMensaje() {
+    public ContenidoMensaje getContenidoMensaje() {
         return contenidoMensaje;
     }
 
-    public void setContenidoMensaje(Lexema contenidoMensaje) {
+    public void setContenidoMensaje(ContenidoMensaje contenidoMensaje) {
         this.contenidoMensaje = contenidoMensaje;
     }
 
-    public Lexema getOperadoresAritmeticos() {
-        return operadoresAritmeticos;
-    }
-
-    public void setOperadoresAritmeticos(Lexema operadoresAritmeticos) {
-        this.operadoresAritmeticos = operadoresAritmeticos;
-    }
-
-    public Lexema getCloseP() {
-        return closeP;
-    }
-
-    public void setCloseP(Lexema closeP) {
-        this.closeP = closeP;
-    }
-
-    public Lexema getSemicolon() {
-        return semicolon;
-    }
-
-    public void setSemicolon(Lexema semicolon) {
-        this.semicolon = semicolon;
-    }
-    
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
-//        if (inicializacion != null) {
-//            hijos.add(new SentenciaToken(inicializacion));
-//        }
-        return hijos;    }
+        hijos = new ArrayList<>();
+        if (mensaje != null) {
+            hijos.add(new SentenciaLexema(mensaje));
+        }
+        if (contenidoMensaje != null) {
+            hijos.add(contenidoMensaje);
+        }
+        for (int i = 0; i < hijos.size(); i++) {
+            System.out.println("hijo " + i + "  " + hijos.get(i));
+        }
+        return hijos;
+    }
 
     @Override
     public String toString() {
-        return "mesaje:" + mensaje.getToken() + " " + equals.getToken() + " " + openP.getToken()
-                + " " + comillas.getToken() + " " + contenidoMensaje.getToken() + " " + operadoresAritmeticos.getToken()
-                + " " + closeP.getToken() + " " + semicolon.getToken();
+        return "mensaje:" + mensaje.getToken();
     }
 
     @Override
