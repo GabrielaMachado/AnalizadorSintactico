@@ -111,6 +111,15 @@ public class GramaticaMain implements Gramatica {
                         posA = posicion;
                         continue;
                     }
+                    
+                    expresionLogica = (ExpresionLogica) gramaticaExpresionLogica.analizar(arrayLexemas);
+
+                    if (llamadoFuncion != null) {
+                        sentenciaMain.getListaSentencia().add(llamadoFuncion);
+                        posicion++;
+                        posA = posicion;
+                        continue;
+                    }
 
                     continuar = false;
                 } while (continuar);
