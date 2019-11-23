@@ -7,26 +7,27 @@ package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author dani0
  */
-public class Inicializacion extends Sentencia{
-    
+public class Inicializacion extends Sentencia {
+
     private Lexema literalBooleana;
 
     private Lexema comillas1;
-    
+
     private Lexema letras;
-    
+
     private Lexema comillas2;
-    
+
     private Lexema numero;
-    
+
     private Lexema numeroDecimal;
-    
+
     private Lexema funcion;
 
     public Inicializacion() {
@@ -100,23 +101,49 @@ public class Inicializacion extends Sentencia{
 
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
-//        if (inicializacion != null) {
-//            hijos.add(new SentenciaToken(inicializacion));
-//        }
-        return hijos;    }
+        hijos = new ArrayList<>();
+        if (literalBooleana != null) {
+            hijos.add(new SentenciaLexema(literalBooleana));
+        }
+        if (numero != null) {
+            hijos.add(new SentenciaLexema(numero));
+        }
+        if (letras != null) {
+            hijos.add(new SentenciaLexema(letras));
+        }
+
+        return hijos;
+    }
 
     @Override
     public String toString() {
-        return "inicializacion:" + literalBooleana.getToken() + " " + comillas1.getToken() + " " + letras.getToken()
-                + " " + comillas2.getToken() + " " + numero.getToken() + " " + numeroDecimal.getToken()
-                + " " + funcion.getToken();
+        return "inicializacion:";
     }
 
     @Override
     public String parse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder str = new StringBuilder();
+        if (literalBooleana != null) {
+            str.append(literalBooleana.getToken());
+            str.append(";");
+        }
+
+        if (numero != null) {
+            str.append(numero.getToken());
+            str.append(";");
+        }
+
+        if (comillas1 != null) {
+            str.append(comillas1.getToken());
+            if (letras != null) {
+                str.append(letras.getToken());
+                if (comillas2 != null) {
+                    str.append(comillas2.getToken());
+                    str.append(";");
+                }
+            }
+        }
+
+        return str.toString();
     }
 }

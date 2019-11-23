@@ -15,7 +15,8 @@ import java.util.List;
  * @author dani0
  */
 public class TipoDato extends Sentencia {
-     /**
+
+    /**
      * Modificador de acceso del metodo.
      */
     private Lexema tipoDato;
@@ -42,7 +43,6 @@ public class TipoDato extends Sentencia {
         this.tipoDato = tipoDato;
     }
 
-
     @Override
     public String toString() {
         return "Atributo:" + tipoDato.getToken();
@@ -50,6 +50,10 @@ public class TipoDato extends Sentencia {
 
     @Override
     public String parse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder str = new StringBuilder();
+
+        str.append(tipoDato.getToken()).append(" ");
+
+        return str.toString();
     }
 }
