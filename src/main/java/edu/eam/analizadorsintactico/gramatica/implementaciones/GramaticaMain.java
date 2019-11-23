@@ -8,6 +8,7 @@ package edu.eam.analizadorsintactico.gramatica.implementaciones;
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
+import edu.eam.analizadorsintactico.excepciones.SintacticException;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Atributo;
@@ -56,6 +57,11 @@ public class GramaticaMain implements Gramatica {
             sentenciaMain.setMain(lexema);
             posA++;
             lexema = arrayLexemas.get(posA);
+            
+        }else{
+            
+            throw new SintacticException(lexema, "main");
+        }
 
             //nombre del atributo....
             if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENKEY) {
@@ -76,21 +82,11 @@ public class GramaticaMain implements Gramatica {
                         posA = posicion;
                         continue;
                     }
-
-                    expresionLogica = (ExpresionLogica) gramaticaExpresionLogica.analizar(arrayLexemas);
-
-                    if (expresionLogica != null) {
-                        sentenciaMain.getListaSentencia().add(expresionLogica);
-
-                        posicion++;
-                        posA = posicion;
-                        continue;
-                    }
-
+                    
                     atributo = (Atributo) gramaticaAtributo.analizar(arrayLexemas);
 
                     if (atributo != null) {
-                        sentenciaMain.getListaSentencia().add(atributo);
+                        sentenciaMain.getListaAtributos().add(atributo);
                         posicion++;
                         posA = posicion;
                         continue;
@@ -108,6 +104,15 @@ public class GramaticaMain implements Gramatica {
                     }
 
                     llamadoFuncion = (LlamadoFuncion) gramaticaLlamadoFuncion.analizar(arrayLexemas);
+
+                    if (llamadoFuncion != null) {
+                        sentenciaMain.getListaSentencia().add(llamadoFuncion);
+                        posicion++;
+                        posA = posicion;
+                        continue;
+                    }
+                    
+                    expresionLogica = (ExpresionLogica) gramaticaExpresionLogica.analizar(arrayLexemas);
 
                     if (llamadoFuncion != null) {
                         sentenciaMain.getListaSentencia().add(llamadoFuncion);
@@ -193,12 +198,12 @@ public class GramaticaMain implements Gramatica {
                     posA = posI;
                     return null; //s
                 }
-            } else {
-                //si no es identificador, no es atributo, se retorna el flujo a 
-                //la posicion inicial
-                posA = posI;
-                return null; //se retorna null para que se pruebe con otra regal..
-            }
+//            } else {
+//                //si no es identificador, no es atributo, se retorna el flujo a 
+//                //la posicion inicial
+//                posA = posI;
+//                return null; //se retorna null para que se pruebe con otra regal..
+//            }
 
         }
 

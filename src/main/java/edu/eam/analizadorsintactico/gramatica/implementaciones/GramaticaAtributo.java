@@ -12,6 +12,7 @@ import edu.eam.analizadorsintactico.excepciones.SintacticException;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Atributo;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.Inicializacion;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.TipoDato;
 import java.util.ArrayList;
 
@@ -25,8 +26,9 @@ public class GramaticaAtributo implements Gramatica {
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 //Sentencia a retornar....
         Atributo atributo = new Atributo();
-
+        Inicializacion inicializacion;
         TipoDato tipoDato;
+        GramaticaInicializacion gramaticaInicializacion = new GramaticaInicializacion();
         Gramatica gramaticaTipoDato = new GramaticaTipoDato();
 
         //  flujoTokens.guardarPosicion();
@@ -51,32 +53,27 @@ public class GramaticaAtributo implements Gramatica {
                 if (lexema.getTipo() == TipoLexemaEnum.ASIGNACION) {
                     atributo.setEquals(lexema);
                     posA++;
+                    posicion = posA;
                     lexema = arrayLexemas.get(posA);
 
-                    if (lexema.getToken().equals("inicializacion")) {
-                        atributo.setInicializacion(lexema);
-                        posA++;
-                        lexema = arrayLexemas.get(posA);
+                    inicializacion = (Inicializacion) gramaticaInicializacion.analizar(arrayLexemas);
 
-                        if (lexema.getTipo() == TipoLexemaEnum.DELIMITADOR) {
-                            //derivar...
-                            posicion = posA;
-                            return atributo;
-                        } else {
+                    if (inicializacion != null) {
+                        atributo.setInicializacion(inicializacion);
+              
+                        return atributo;
 
-                            //si no es identificador, no es atributo, se retorna el flujo a 
-                            //la posicion inicial
-                            posA = posI;
-
-                            return null; //se retorna null para que se pruebe con otra regal..
-                        }
                     } else {
+
+                        //si no es identificador, no es atributo, se retorna el flujo a 
+                        //la posicion inicial
                         posA = posI;
-                        return null; //
+
+                        return null; //se retorna null para que se pruebe con otra regal..
                     }
                 } else {
                     posA = posI;
-                    return null; //s
+                    return null; //
                 }
             } else {
                 //si no es identificador, no es atributo, se retorna el flujo a 
@@ -86,6 +83,7 @@ public class GramaticaAtributo implements Gramatica {
             }
 
         }
+
         return null;
     }
 

@@ -21,15 +21,15 @@ public class IF extends Sentencia {
      */
     private Lexema IF;
     private Condicion condicion;
-    private Cuerpo cuerpo;
+    private Lista<Sentencia> listaSentencias;
 
     public IF() {
     }
 
-    public IF(Lexema IF, Condicion condicion, Cuerpo cuerpo) {
+    public IF(Lexema IF, Condicion condicion, Lista<Sentencia> listaSentencias) {
         this.IF = IF;
         this.condicion = condicion;
-        this.cuerpo = cuerpo;
+        this.listaSentencias = listaSentencias;
     }
 
     @Override
@@ -42,8 +42,8 @@ public class IF extends Sentencia {
         if (condicion != null) {
             hijos.add(condicion);
         }
-        if (cuerpo != null) {
-            hijos.add(cuerpo);
+        if (listaSentencias != null) {
+            hijos.add(listaSentencias);
         }
         for (int i = 0; i < hijos.size(); i++) {
             System.out.println("hijo " + i + "  " + hijos.get(i));
@@ -68,12 +68,12 @@ public class IF extends Sentencia {
         this.condicion = condicion;
     }
 
-    public Cuerpo getCuerpo() {
-        return cuerpo;
+    public Lista<Sentencia> getlistaSentencias() {
+        return listaSentencias;
     }
 
-    public void setCuerpo(Cuerpo cuerpo) {
-        this.cuerpo = cuerpo;
+    public void setlistaSentencias(Lista<Sentencia> cuerpo) {
+        this.listaSentencias = cuerpo;
     }
 
     @Override

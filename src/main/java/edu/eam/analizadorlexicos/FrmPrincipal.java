@@ -26,7 +26,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public static Automata prueba = new Automata();
     public static Character cadena[];
-    
+
     public FrmPrincipal() {
         initComponents();
         jTable1.setModel(llenarTabla());
@@ -50,6 +50,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnAnalizar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +131,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane3.setViewportView(jTree1);
 
+        jButton1.setText("Generar JAVA");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,14 +150,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(215, 215, 215)
                         .addComponent(btnAnalizar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +174,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAnalizar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAnalizar)
+                            .addComponent(jButton1))))
                 .addContainerGap())
         );
 
@@ -175,12 +187,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         posInicial = 0;
         posActual = 0;
         cadena = prueba.leer(txtTexto.getText());
-         ArrayList<Lexema>  lista;
+        ArrayList<Lexema> lista;
 //        lblTexto.setText(txtTexto.getText());
-     //   txtTexto.setText("");
+        //   txtTexto.setText("");
         if (arrayLexema.isEmpty()) {
             lista = verificarAutomatas(cadena);
-            
+
         } else {
             arrayLexema.clear();
             lista = verificarAutomatas(cadena);
@@ -188,15 +200,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jTable1.setModel(llenarTabla());
         AnalizadorSintactico.verificarGramaticas(lista);
         SentenciaMain main = AnalizadorSintactico.getMain();
-        if (main!= null){
+        if (main != null) {
             main.llenarHijos();
         }
-        
+        String parseo = main.parse();
+        System.out.println(parseo);
         jTree1.setModel(new DefaultTreeModel(main));
-       
+
     }//GEN-LAST:event_btnAnalizarActionPerformed
 
-   public DefaultTableModel llenarTabla() {
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public DefaultTableModel llenarTabla() {
         DefaultTableModel modelTabla;
         String nombreColumnas[] = {"Token", "Tipo", "Ubicación"};
         modelTabla = new DefaultTableModel(new Object[][]{}, nombreColumnas);
@@ -214,8 +231,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
         return modelTabla;
-    }    
-    
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -253,6 +270,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnalizar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -29,12 +29,12 @@ public class Atributo extends Sentencia {
     /**
      * Tipo de retorno.
      */
-    private Lexema inicializacion;
+    private Inicializacion inicializacion;
 
     public Atributo() {
     }
 
-    public Atributo(TipoDato tipoDato, Lexema ident, Lexema equals, Lexema inicializacion) {
+    public Atributo(TipoDato tipoDato, Lexema ident, Lexema equals, Inicializacion inicializacion) {
         this.tipoDato = tipoDato;
         this.ident = ident;
         this.equals = equals;
@@ -49,7 +49,7 @@ public class Atributo extends Sentencia {
         }
         hijos.add(new SentenciaLexema(ident));
         if (inicializacion != null) {
-            hijos.add(new SentenciaLexema(inicializacion));
+            hijos.add(inicializacion);
         }
         return hijos;
     }
@@ -75,14 +75,14 @@ public class Atributo extends Sentencia {
     }
 
     public void setEquals(Lexema equals) {
-        this.ident = equals;
+        this.equals = equals;
     }
 
-    public Lexema getInicializacion() {
+    public Inicializacion getInicializacion() {
         return inicializacion;
     }
 
-    public void setInicializacion(Lexema inicializacion) {
+    public void setInicializacion(Inicializacion inicializacion) {
         this.inicializacion = inicializacion;
     }
 
@@ -93,7 +93,14 @@ public class Atributo extends Sentencia {
 
     @Override
     public String parse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder str = new StringBuilder();
+
+        str.append(tipoDato.parse());
+        str.append(ident.getToken()).append(" ");
+        str.append(equals.getToken()).append(" ");
+        str.append(inicializacion.parse()).append("\n");
+        
+        return str.toString();
     }
 
 }

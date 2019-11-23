@@ -15,8 +15,10 @@ import java.util.List;
  * @author dani0
  */
 public class SentenciaMain extends Sentencia {
-    
+
     private Lista<Sentencia> listaSentencia;
+
+    private Lista<Atributo> listaAtributos;
 
     private Lexema main;
 
@@ -36,6 +38,7 @@ public class SentenciaMain extends Sentencia {
 
     public SentenciaMain() {
         listaSentencia = new Lista<>();
+        listaAtributos = new Lista<>();
     }
 
 //    public SentenciaMain(Cuerpo cuerpo, Lexema main, Lexema openKey, IF condicion, Lexema closeKey, Atributo atributo, Instancia instancia,
@@ -49,12 +52,16 @@ public class SentenciaMain extends Sentencia {
 //        this.llamadoFuncion = llamadoFuncion;
 //        this.cuerpo = cuerpo;
 //    }
-
-   
-    
-    
     public LlamadoFuncion getLlamadoFuncion() {
         return llamadoFuncion;
+    }
+
+    public Lista<Atributo> getListaAtributos() {
+        return listaAtributos;
+    }
+
+    public void setListaAtributos(Lista<Atributo> listaAtributos) {
+        this.listaAtributos = listaAtributos;
     }
 
     public void setLlamadoFuncion(LlamadoFuncion llamadoFuncion) {
@@ -125,16 +132,18 @@ public class SentenciaMain extends Sentencia {
         this.listaSentencia = listaSentencia;
     }
 
-    
-    
     @Override
     public List<Sentencia> llenarHijos() {
         hijos = new ArrayList<>();
 
-        if(listaSentencia.getSentencias() != null){
+        if (listaSentencia.getSentencias() != null) {
             hijos.add(listaSentencia);
         }
-        
+
+        if (listaAtributos.getSentencias() != null) {
+            hijos.add(listaAtributos);
+        }
+
         if (main != null) {
             hijos.add(new SentenciaLexema(main));
         }
@@ -167,6 +176,30 @@ public class SentenciaMain extends Sentencia {
 
     @Override
     public String parse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder str = new StringBuilder();
+        str.append("public class Clase { \n");
+
+        if (listaAtributos != null) {
+            for (Atributo sentencia : listaAtributos.getSentencias()) {
+                str.append(sentencia.parse());
+            }
+        }
+
+        if (main != null) {
+            str.append(" public static void main(String[] args)");
+        }
+
+        if (openKey != null) {
+            str.append(openKey.getToken()).append("\n");
+        }
+
+
+        str.append("\n");
+
+        if (closeKey != null) {
+            str.append(closeKey.getToken());
+        }
+
+        return str.toString();
     }
 }
