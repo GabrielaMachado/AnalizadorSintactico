@@ -11,6 +11,7 @@ import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posi
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Condicion;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.OpLogico;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +23,9 @@ public class GramaticaCondicion implements Gramatica {
     @Override
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
         Condicion condicion = new Condicion();
+
+        OpLogico opLogico;
+        Gramatica gramaticaOpLogico = new GramaticaOpLogico();
         //  flujoTokens.guardarPosicion();
         int posI = posicion;
         int posA = posicion;
@@ -33,19 +37,21 @@ public class GramaticaCondicion implements Gramatica {
             condicion.setIdent1(lexema);
             posA++;
             lexema = arrayLexemas.get(posA);
+            posicion = posA;
+            opLogico = (OpLogico) gramaticaOpLogico.analizar(arrayLexemas);
 
             //nombre del atributo....
-            if (lexema.getTipo() == TipoLexemaEnum.O_RELACIONAL) {
-                condicion.setOperadoresRelacionales(lexema);
+            if (opLogico != null) {
+                condicion.setOpLogico(opLogico);
                 posA++;
                 lexema = arrayLexemas.get(posA);
 
-                if (lexema.getTipo() == TipoLexemaEnum.IDENT || lexema.getTipo() == TipoLexemaEnum.NUMERO) {
+                if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
                     condicion.setIdent2(lexema);
                     posA++;
                     lexema = arrayLexemas.get(posA);
 
-                    if (lexema.getToken().equals(";")) {
+                    if (lexema.getTipo() == TipoLexemaEnum.DELIMITADOR) {
                         //derivar...
                         posicion = posA;
                         return condicion;
@@ -61,9 +67,9 @@ public class GramaticaCondicion implements Gramatica {
                     return null; //s
                 }
             }
-
-            if (lexema.getToken().equals(";")) {
+            if (lexema.getTipo() == TipoLexemaEnum.DELIMITADOR) {
                 //derivar...
+                posicion = posA;
                 return condicion;
             } else {
                 //si no es identificador, no es atributo, se retorna el flujo a 
@@ -71,9 +77,7 @@ public class GramaticaCondicion implements Gramatica {
                 posA = posI;
                 return null; //se retorna null para que se pruebe con otra regal..
             }
-
         }
-
         return null;
     }
 
