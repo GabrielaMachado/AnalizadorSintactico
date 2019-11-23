@@ -12,6 +12,8 @@ import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import static edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica.posicionInicial;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.Case;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.Cuerpo;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.OpAritmetico;
 import java.util.ArrayList;
 
 /**
@@ -24,6 +26,10 @@ public class GramaticaCase implements Gramatica {
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 //Sentencia a retornar....
         Case isCase = new Case();
+        OpAritmetico opAritmetico;
+        Cuerpo cuerpo;
+        Gramatica gramaticaOpAritmetico = new GramaticaOpAritmetico();
+        Gramatica gramaticaCuerpo = new GramaticaCuerpo();
         //  flujoTokens.guardarPosicion();
         int posI = posicion;
         int posA = posicion;
@@ -38,37 +44,37 @@ public class GramaticaCase implements Gramatica {
 
             //nombre del atributo....
             if (lexema.getTipo() == TipoLexemaEnum.QUOTES) {
-                isCase.setComillas1(lexema);
                 posA++;
                 lexema = arrayLexemas.get(posA);
 
-                if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENP/*letras*/) {
-                    isCase.setLetras(lexema);
+                if (lexema.getTipo() == TipoLexemaEnum.IDENT) {
+                    isCase.setIdent(lexema);
                     posA++;
                     lexema = arrayLexemas.get(posA);
+                    posicion = posA;
+                    opAritmetico = (OpAritmetico) gramaticaOpAritmetico.analizar(arrayLexemas);
 
-                    if (lexema.getTipo() == TipoLexemaEnum.OPERADORARITMETICO) {
-                        isCase.setOperadoresAritmeticos(lexema);
+                    if (opAritmetico != null) {
+                        isCase.setOpAritmetico(opAritmetico);
                         posA++;
                         lexema = arrayLexemas.get(posA);
 
                         if (lexema.getTipo() == TipoLexemaEnum.QUOTES) {
-                            isCase.setComillas2(lexema);
                             posA++;
                             lexema = arrayLexemas.get(posA);
 
                             if (lexema.getTipo() == TipoLexemaEnum.ASIGNACION) {
-                                isCase.setEquals(lexema);
                                 posA++;
                                 lexema = arrayLexemas.get(posA);
+                                posicion = posA;
+                                cuerpo = (Cuerpo) gramaticaCuerpo.analizar(arrayLexemas);
 
-                                if (lexema.getToken().equals("cuerpo")) {
-                                    isCase.setCuerpo(lexema);
+                                if (cuerpo != null) {
+                                    isCase.setCuerpo(cuerpo);
                                     posA++;
                                     lexema = arrayLexemas.get(posA);
 
                                     if (lexema.getTipo() == TipoLexemaEnum.DELIMITADOR) {
-                                        isCase.setSemicolon1(lexema);
                                         posA++;
                                         lexema = arrayLexemas.get(posA);
 
@@ -76,6 +82,7 @@ public class GramaticaCase implements Gramatica {
                                             isCase.setIsBreak(lexema);
                                             posA++;
                                             lexema = arrayLexemas.get(posA);
+
                                             if (lexema.getTipo() == TipoLexemaEnum.DELIMITADOR) {
                                                 //derivar...
                                                 posicion = posA;
