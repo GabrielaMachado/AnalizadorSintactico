@@ -10,6 +10,9 @@ import edu.eam.analizadorlexicos.TipoLexemaEnum;
 import static edu.eam.analizadorsintactico.controlador.AnalizadorSintactico.posicion;
 import edu.eam.analizadorsintactico.gramatica.definiciones.Gramatica;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.Cuerpo;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.ExpresionLogica;
+import edu.eam.analizadorsintactico.sentencias.implementaciones.LiteralBooleana;
 import edu.eam.analizadorsintactico.sentencias.implementaciones.While;
 import java.util.ArrayList;
 
@@ -23,6 +26,15 @@ public class GramaticaWhile implements Gramatica {
     public Sentencia analizar(ArrayList<Lexema> arrayLexemas) {
 //Sentencia a retornar....
         While isWhile = new While();
+        LiteralBooleana literalBooleana;
+        ExpresionLogica expresionLogica;
+        Cuerpo cuerpo1;
+        Cuerpo cuerpo2;
+        Gramatica gramaticaLiteralBooleana = new GramaticaLiteralBooleana();
+        Gramatica gramaticaExpresionLogica = new GramaticaExpresionLogica();
+        Gramatica gramaticaCuerpo1 = new GramaticaCuerpo();
+        Gramatica gramaticaCuerpo2 = new GramaticaCuerpo();
+
         //  flujoTokens.guardarPosicion();
         int posI = posicion;
         int posA = posicion;
@@ -37,51 +49,57 @@ public class GramaticaWhile implements Gramatica {
 
             //nombre del atributo....
             if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENP) {
-                isWhile.setOpenP(lexema);
                 posA++;
                 lexema = arrayLexemas.get(posA);
+                posicion = posA;
+                literalBooleana = (LiteralBooleana) gramaticaLiteralBooleana.analizar(arrayLexemas);
 
-                if (lexema.getTipo() == TipoLexemaEnum.LBOL_TRUE || lexema.getTipo() == TipoLexemaEnum.LBOL_FALSE) {
-                    isWhile.setLiteralBooleana(lexema);
+                if (literalBooleana != null) {
+                    isWhile.setLiteralBooleana(literalBooleana);
                     posA++;
                     lexema = arrayLexemas.get(posA);
+                    posicion = posA;
+                    expresionLogica = (ExpresionLogica) gramaticaExpresionLogica.analizar(arrayLexemas);
 
-                    if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY/*expresion comparacion*/) {
-                        isWhile.setExpresionComparacion(lexema);
+                    if (expresionLogica != null) {
+                        isWhile.setExpresionLogica(expresionLogica);
                         posA++;
                         lexema = arrayLexemas.get(posA);
 
                         if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEP) {
-                            isWhile.setCloseP(lexema);
                             posA++;
                             lexema = arrayLexemas.get(posA);
 
                             if (lexema.getTipo() == TipoLexemaEnum.AGR_OPENKEY) {
-                                isWhile.setOpenKey(lexema);
                                 posA++;
                                 lexema = arrayLexemas.get(posA);
+                                posicion = posA;
+                                cuerpo1 = (Cuerpo) gramaticaCuerpo1.analizar(arrayLexemas);
 
-                                if (lexema.getToken().equals("cuerpo")) {
-                                    isWhile.setCuerpo1(lexema);
+                                if (cuerpo1 != null) {
+                                    isWhile.setCuerpo1(cuerpo1);
                                     posA++;
                                     lexema = arrayLexemas.get(posA);
+
                                     if (lexema.getTipo() == TipoLexemaEnum.AGR_CLOSEKEY) {
-                                        isWhile.setCloseKey(lexema);
                                         posA++;
                                         lexema = arrayLexemas.get(posA);
+
                                         if (lexema.getTipo() == TipoLexemaEnum.DELIMITADOR) {
-                                            isWhile.setSemicolon(lexema);
                                             posA++;
                                             lexema = arrayLexemas.get(posA);
-                                            if (lexema.getToken().equals("cuerpo2")) {
+                                            posicion = posA;
+                                            cuerpo2 = (Cuerpo) gramaticaCuerpo2.analizar(arrayLexemas);
+
+                                            if (cuerpo2 != null) {
                                                 //derivar...
                                                 posicion = posA;
                                                 return isWhile;
                                             } else {
                                                 //si no es identificador, no es atributo, se retorna el flujo a 
                                                 //la posicion inicial
-                                                posA = posI;
-                                                return null; //se retorna null para que se pruebe con otra regal..
+                                                posicion = posA;
+                                                return isWhile; //se retorna null para que se pruebe con otra regal..
                                             }
                                         } else {
                                             posA = posI;
