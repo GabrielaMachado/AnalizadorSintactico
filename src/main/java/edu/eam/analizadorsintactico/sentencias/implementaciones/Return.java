@@ -7,54 +7,57 @@ package edu.eam.analizadorsintactico.sentencias.implementaciones;
 
 import edu.eam.analizadorlexicos.Lexema;
 import edu.eam.analizadorsintactico.sentencias.definicion.Sentencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author dani0
  */
-public class Return extends Sentencia{
-    
-    private Lexema mensaje;
+public class Return extends Sentencia {
 
-    private Lexema literalBooleana;
-    
+    private Lexema isReturn;
+    private Mensaje mensaje;
+    private LiteralBooleana literalBooleana;
     private Lexema ident;
-    
     private Lexema isNull;
-    
-    private Lexema funcion;
-    
-    private Lexema expresion;
-    
-    private Lexema semicolon;
+    private Metodo metodo;
+    private Expresion expresion;
 
     public Return() {
     }
 
-    public Return(Lexema mensaje, Lexema literalBooleana, Lexema ident, Lexema isNull, Lexema funcion, Lexema expresion, Lexema semicolon) {
+    public Return(Lexema isReturn, Mensaje mensaje, LiteralBooleana literalBooleana, Lexema ident, Lexema isNull, Metodo metodo, Expresion expresion) {
+        this.isReturn = isReturn;
         this.mensaje = mensaje;
         this.literalBooleana = literalBooleana;
         this.ident = ident;
         this.isNull = isNull;
-        this.funcion = funcion;
+        this.metodo = metodo;
         this.expresion = expresion;
-        this.semicolon = semicolon;
     }
 
-    public Lexema getMensaje() {
+    public Lexema getIsReturn() {
+        return isReturn;
+    }
+
+    public void setIsReturn(Lexema isReturn) {
+        this.isReturn = isReturn;
+    }
+
+    public Mensaje getMensaje() {
         return mensaje;
     }
 
-    public void setMensaje(Lexema mensaje) {
+    public void setMensaje(Mensaje mensaje) {
         this.mensaje = mensaje;
     }
 
-    public Lexema getLiteralBooleana() {
+    public LiteralBooleana getLiteralBooleana() {
         return literalBooleana;
     }
 
-    public void setLiteralBooleana(Lexema literalBooleana) {
+    public void setLiteralBooleana(LiteralBooleana literalBooleana) {
         this.literalBooleana = literalBooleana;
     }
 
@@ -74,52 +77,61 @@ public class Return extends Sentencia{
         this.isNull = isNull;
     }
 
-    public Lexema getFuncion() {
-        return funcion;
+    public Metodo getMetodo() {
+        return metodo;
     }
 
-    public void setFuncion(Lexema funcion) {
-        this.funcion = funcion;
+    public void setMetodo(Metodo metodo) {
+        this.metodo = metodo;
     }
 
-    public Lexema getExpresion() {
+    public Expresion getExpresion() {
         return expresion;
     }
 
-    public void setExpresion(Lexema expresion) {
+    public void setExpresion(Expresion expresion) {
         this.expresion = expresion;
     }
 
-    public Lexema getSemicolon() {
-        return semicolon;
-    }
-
-    public void setSemicolon(Lexema semicolon) {
-        this.semicolon = semicolon;
-    }
-    
-    
-    
     @Override
     public List<Sentencia> llenarHijos() {
-//        hijos = new ArrayList<>();
-//        hijos.add(new SentenciaToken(tipoDato));
-//        hijos.add(new SentenciaToken(ident));
-//        if (inicializacion != null) {
-//            hijos.add(new SentenciaToken(inicializacion));
-//        }
-        return hijos;    }
+        hijos = new ArrayList<>();
+        if (isReturn != null) {
+            hijos.add(new SentenciaLexema(isReturn));
+        }
+        if (mensaje != null) {
+            hijos.add(mensaje);
+        }
+        if (literalBooleana != null) {
+            hijos.add(literalBooleana);
+        }
+        if (ident != null) {
+            hijos.add(new SentenciaLexema(ident));
+        }
+        if (isNull != null) {
+            hijos.add(new SentenciaLexema(isNull));
+        }
+        if (metodo != null) {
+            hijos.add(metodo);
+        }
+        if (expresion != null) {
+            hijos.add(expresion);
+        }
+        for (int i = 0; i < hijos.size(); i++) {
+            System.out.println("hijo " + i + "  " + hijos.get(i));
+        }
+        return hijos;
+    }
 
     @Override
     public String toString() {
-        return "return:" + mensaje.getToken() + " " + literalBooleana.getToken() + " " + ident.getToken()
-                + " " + isNull.getToken() + " " + funcion.getToken() + " " + expresion.getToken()
-                + " " + semicolon.getToken();
+        return "return:" + mensaje.getMensaje()+ " " + literalBooleana.getLiteralBooleana()+ " " + ident.getToken()
+                + " " + isNull.getToken() + " " + metodo.getIdent();
     }
 
     @Override
     public String parse() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
