@@ -20,29 +20,17 @@ public class Condicion extends Sentencia {
      * Modificador de acceso del metodo.
      */
     private Lexema ident1;
-    /**
-     * Nombre del metodo
-     */
-    private Lexema operadoresRelacionales;
-
-    /**
-     * Tipo de retorno.
-     */
+    private OpLogico opLogico;
     private Lexema ident2;
 
-    /**
-     * Tipo de retorno.
-     */
-    private Lexema numero;
 
     public Condicion() {
     }
 
-    public Condicion(Lexema ident1, Lexema operadoresRelacionales, Lexema ident2, Lexema numero) {
+    public Condicion(Lexema ident1, OpLogico opLogico, Lexema ident2) {
         this.ident1 = ident1;
-        this.operadoresRelacionales = operadoresRelacionales;
+        this.opLogico = opLogico;
         this.ident2 = ident2;
-        this.numero = numero;
     }
 
     public Lexema getIdent1() {
@@ -53,12 +41,12 @@ public class Condicion extends Sentencia {
         this.ident1 = ident1;
     }
 
-    public Lexema getOperadoresRelacionales() {
-        return operadoresRelacionales;
+    public OpLogico getOpLogico() {
+        return opLogico;
     }
 
-    public void setOperadoresRelacionales(Lexema operadoresRelacionales) {
-        this.operadoresRelacionales = operadoresRelacionales;
+    public void setOpLogico(OpLogico opLogico) {
+        this.opLogico = opLogico;
     }
 
     public Lexema getIdent2() {
@@ -69,22 +57,18 @@ public class Condicion extends Sentencia {
         this.ident2 = ident2;
     }
 
-    public Lexema getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Lexema numero) {
-        this.numero = numero;
-    }
-
     @Override
     public List<Sentencia> llenarHijos() {
         hijos = new ArrayList<>();
-        hijos.add(new SentenciaLexema(ident1));
-        hijos.add(new SentenciaLexema(ident2));
-//        if (inicializacion != null) {
-//            hijos.add(new SentenciaToken(inicializacion));
-//        }
+        if (ident1 != null) {
+            hijos.add(new SentenciaLexema(ident1));
+        }
+        if (opLogico != null) {
+            hijos.add(opLogico);
+        }
+        if (ident2 != null) {
+            hijos.add(new SentenciaLexema(ident2));
+        }
         return hijos;
     }
 
